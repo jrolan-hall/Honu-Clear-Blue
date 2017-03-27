@@ -1,0 +1,21 @@
+R2 trigger = accelerator #acceleration rate from 0 to 100% of max
+
+L2 trigger = brake and reverse #acceleration/deceleration rate from 0 to 100%
+
+#R1 = reverse #decelerationa rate from 0 to 100% of max
+
+L1 = shuffle #shuffle rate from 0 to 100%
+
+L stick = steer #-100 to 100 (if value<0: turn left (RMO fwd, LMO stop), if value>0 turn right (LMO fwd, RMO stop), turn rate = magnitude of value )
+
+X = door open/close #will work on timer so proportional control
+
+start = ignition #ie quick connect and disconnect controller
+
+box + L stick = pivot turn ##-100 to 100 (if value<0: turn left (RMO fwd, LMO rev), if value>0 turn right (LMO fwd, RMO rev), turn rate = magnitude of value )
+
+triangle = toggle light colors
+
+circle = comb motor start/stop #controller regulates torque
+
+directional pad = alternative steering #maybe

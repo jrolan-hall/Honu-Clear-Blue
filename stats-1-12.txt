@@ -1,0 +1,14 @@
+lines: 1843 + 101 + 424 + 41 + 132 + 258 + 192 + 47= 3038
+functions: 129 + 2 + 26 + 3 + 7 + 26 + 11 + 6 = 210
+equals: 2845 + 97 + 188 + 8 + 49 + 82 + 186 + 17= 3472
+objects: 2136
+
+honuhome
+weaved
+helper
+pichat
+greedy
+network
+onboard
+
+updates: 1-16-2017
