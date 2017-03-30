@@ -1618,7 +1618,9 @@ class App():
 
     def load_anchors(self):
         '''Load anchors from file'''
-        self.loadfile = tkFileDialog.askopenfilename()
+        FILEOPENOPTIONS = dict(defaultextension='.honu',
+                  filetypes=[('All files','*.*'), ('Honu file','*.honu')])
+        self.loadfile = tkFileDialog.askopenfilename(**FILEOPENOPTIONS)
         try:
             (self.anchorslat, self.anchorslon) = helper.load_anchors(self.loadfile)
             self.instr2.configure(text='I successfully loaded the contents of '+self.loadfile+'.\nYou can view them by clicking the view icon.')
