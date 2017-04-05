@@ -1,11 +1,12 @@
 import network
-#import sys
-#from random import random
 import onboard
 import evdev
 import threading
 from time import sleep, time
 import explorerhat as eh
+import serial
+
+arduino = serial.Serial('/dev/ttyACM0', 9600)
 
 
 class App():
@@ -169,6 +170,37 @@ class App():
 				tell_arduino()
 
 
+		def hello_arduino():
+			hail = arduino.readline()
+			print hail
+			hail = hail[:-2].split('|')
+			[HMD_str, TMP_str, DSW_str, SIR1_str, SIR2_str, SIR3_str, LCLIFF_str, R_CLIFF_str, BATL_str] = [0,0,0,0,0,0,0,0,0]
+			strings = [HMD_str, TMP_str, DSW_str, SIR1_str, SIR2_str, SIR3_str, LCLIFF_str, R_CLIFF_str, BATL_str] 
+			if len(hail)==len(strings):
+				for i in range(0, len(strings)):
+					strings[i] = (hail[i]).split(':')[1]
+				self.state['HUM'] = HMD_str
+				self.state['TMP'] = TMP_str
+
+				#check door
+				if int(DSW_str) == 1: #door is closed
+					self.state['DOOR'] = 'N'
+
+				#check receptacle
+				level = 0
+				shell_IRs = [SIR1_str, SIR2_str, SIR3_str]
+				for IR in shell_IRs:
+					if int(IR) == 1:
+						level += 1
+				self.state['VOL'] = level
+				self.state['LCLIFF'] = LCLIFF_str
+				self.state['RCLIFF'] = R_CLIFF_str
+				self.state['BATL'] = BATL_str
+
+			tell_arduino()
+
+
+
 		def set_defaults():
 			self.door = 'N' #trash door: N = neutral (closed), C = closing, O1 = opening, O = neutral(open)
 			self.control = 'M' #control type: A = auto, M = manual
@@ -212,6 +244,7 @@ class App():
 						self.state['CMO'] = 'R'
 					else:
 						self.state['CMO'] = 'N'
+					hello_arduino()
 					sleep(0.1)
 					#collision_avoidance()
 					#print self.state['FDIST'], self.state['FCLR'], self.state['BDIST'], self.state['BCLR']
@@ -312,12 +345,11 @@ class App():
 				 									
 
 		def tell_arduino():
-			string = 'CMO:%s||LMO:%s||RMO:%s||DOOR:%s||F_LED:%s||L_LED:%s||R_LED:%s||B_LED:%s' %(self.c_acc, self.l_acc, self.r_acc, self.door, self.F_LED, self.L_LED, self.R_LED, self.B_LED)
+			string = 'CMO:%s|LMO:%s|RMO:%s|DOOR:%s|F_LED:%s|L_LED:%s|R_LED:%s|B_LED:%s&' %(self.c_acc, self.l_acc, self.r_acc, self.door, self.F_LED, self.L_LED, self.R_LED, self.B_LED)
 			if string != self.command:
 				self.command = string
 				print self.command
-				eh.motor.one.speed(self.l_acc)
-				eh.motor.two.speed(self.l_acc)
+				arduino.write(string)
 				
 
 
