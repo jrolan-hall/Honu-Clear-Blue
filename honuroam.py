@@ -374,9 +374,6 @@ class App():
 				w.start()
 				
 
-				
-				 									
-
 		def tell_arduino():
 			string = 'CMO:%s|LMO:%s|RMO:%s|DOOR:%s|F_LED:%s|L_LED:%s|R_LED:%s|B_LED:%s&' %(self.c_acc, self.l_acc, self.r_acc, self.door, self.F_LED, self.L_LED, self.R_LED, self.B_LED)
 			#if string != self.command:
