@@ -204,6 +204,7 @@ class App():
 			elif tag == 'TMP':
 				self.state['TMP'] = value
 
+			'''
 			hail = hail[:-2].split('|')
 			[HMD_str, TMP_str, DSW_str, SIR1_str, SIR2_str, SIR3_str, LCLIFF_str, R_CLIFF_str, BATL_str] = [0,0,0,0,0,0,0,0,0]
 			strings = [HMD_str, TMP_str, DSW_str, SIR1_str, SIR2_str, SIR3_str, LCLIFF_str, R_CLIFF_str, BATL_str] 
@@ -227,6 +228,7 @@ class App():
 				self.state['LCLIFF'] = LCLIFF_str
 				self.state['RCLIFF'] = R_CLIFF_str
 				self.state['BATL'] = BATL_str
+			'''
 
 			tell_arduino()
 
@@ -377,52 +379,52 @@ class App():
 
 		def tell_arduino():
 			string = 'CMO:%s|LMO:%s|RMO:%s|DOOR:%s|F_LED:%s|L_LED:%s|R_LED:%s|B_LED:%s&' %(self.c_acc, self.l_acc, self.r_acc, self.door, self.F_LED, self.L_LED, self.R_LED, self.B_LED)
-			if string != self.command:
-				self.command = string
-				print self.command
-				#LEDS
-				if self.F_LED != 0:
-					arduino.write('6001')
-				else:
-					arduino.write('6002')
-				if self.L_LED != 0:
-					arduino.write('6003')
-				else:
-					arduino.write('6004')
-				if self.R_LED != 0:
-					arduino.write('6005')
-				else:
-					arduino.write('6006')
-				if self.B_LED != 0:
-					arduino.write('6007')
-				else:
-					arduino.write('6008')
+			#if string != self.command:
+			self.command = string
+			print self.command
+			#LEDS
+			if self.F_LED != 0:
+				arduino.write('6001')
+			else:
+				arduino.write('6002')
+			if self.L_LED != 0:
+				arduino.write('6003')
+			else:
+				arduino.write('6004')
+			if self.R_LED != 0:
+				arduino.write('6005')
+			else:
+				arduino.write('6006')
+			if self.B_LED != 0:
+				arduino.write('6007')
+			else:
+				arduino.write('6008')
 
-				#MOTORS
-				if self.l_acc == self.r_acc: #both drive motors moving at same speed
-					output = int(1500+500*self.l_acc/100.0)
-					if output == 2000:
-						output = 1999
-					arduino.write(str(output))
-				else: #drive motors moving at different speeds
-					left = int(2500+500*self.l_acc/100.0)
-					right = int(3500+500*self.r_acc/100.0)
-					if left == 3000:
-						left = 2999
-					if right == 4000:
-						right = 3999
-					arduino.write(str(left))
-					arduino.write(str(right))
-				comb = int(4500+500*self.c_acc/100.0) #comb
-				if comb == 5000:
-					comb = 4999
-				arduino.write(str(comb))
-				if self.door == 'O1' or 'O': #door
-					arduino.write('5000')
-				elif self.door == 'C':
-					arduino.write('5999')
-				elif self.door == 'N'
-					arduino.write('5500')
+			#MOTORS
+			if self.l_acc == self.r_acc: #both drive motors moving at same speed
+				output = int(1500+500*self.l_acc/100.0)
+				if output == 2000:
+					output = 1999
+				arduino.write(str(output))
+			else: #drive motors moving at different speeds
+				left = int(2500+500*self.l_acc/100.0)
+				right = int(3500+500*self.r_acc/100.0)
+				if left == 3000:
+					left = 2999
+				if right == 4000:
+					right = 3999
+				arduino.write(str(left))
+				arduino.write(str(right))
+			comb = int(4500+500*self.c_acc/100.0) #comb
+			if comb == 5000:
+				comb = 4999
+			arduino.write(str(comb))
+			if self.door == 'O1' or 'O': #door
+				arduino.write('5000')
+			elif self.door == 'C':
+				arduino.write('5999')
+			elif self.door == 'N'
+				arduino.write('5500')
 
 				#arduino.write(string)
 				
