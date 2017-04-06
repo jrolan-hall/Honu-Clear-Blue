@@ -163,5 +163,5 @@ void loop()
     digitalWrite(9, LOW);
   }
   
-  delay(50);
+  delay(10);
 }
