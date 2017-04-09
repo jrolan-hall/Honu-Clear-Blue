@@ -1,11 +1,12 @@
 import network
-#import sys
-#from random import random
 import onboard
 import evdev
 import threading
 from time import sleep, time
 import explorerhat as eh
+import serial
+
+arduino = serial.Serial('/dev/ttyACM0', 9600)
 
 
 class App():
@@ -129,14 +130,10 @@ class App():
 						self.c_acc = 0
 				#toggle door
 				if self.keyval['CROSS_btn'] and self.control == 'M':
-					if self.door == 'N':
-						self.door = 'O1'
-					elif self.door == 'O1':
-						self.door = 'C'
+					if self.door == 'C':
+						self.door = 'O'
 					elif self.door == 'O':
 						self.door = 'C'
-					elif self.door == 'C':
-						self.door = 'O1'
 
 
 			if self.control == 'M':			
@@ -169,8 +166,72 @@ class App():
 				tell_arduino()
 
 
+		def hello_arduino():
+			howdy = arduino.readline()
+			print howdy
+			try:
+				howdy = howdy[:-1].split(':')
+				tag = hail[0]
+				value = hail[1]
+			except:
+				tag = None
+				value = None
+			if tag == 'SIR1':
+				if int(value) > 2:
+					level = 1
+					self.state['VOL'] = 1
+			elif tag == 'SIR2':
+				if int(value) > 2:
+					level = 2
+					self.state['VOL'] = 2
+			elif tag == 'SIR3':
+				if int(value) > 2:
+					level = 3
+					self.state['VOL'] = 3
+			elif tag == 'DSW':
+				if int(value) == 1:
+					self.['DOOR'] = 'N'
+			elif tag == 'FCLF':
+				self.state['FCLIFF'] = value
+			elif tag == 'BCLF':
+				self.state['BCLIFF'] = value
+			elif tag == 'HMD':
+				self.state['HUM'] = value
+			elif tag == 'TMP':
+				self.state['TMP'] = value
+
+			'''
+			hail = hail[:-2].split('|')
+			[HMD_str, TMP_str, DSW_str, SIR1_str, SIR2_str, SIR3_str, LCLIFF_str, R_CLIFF_str, BATL_str] = [0,0,0,0,0,0,0,0,0]
+			strings = [HMD_str, TMP_str, DSW_str, SIR1_str, SIR2_str, SIR3_str, LCLIFF_str, R_CLIFF_str, BATL_str] 
+			if len(hail)==len(strings):
+				for i in range(0, len(strings)):
+					strings[i] = (hail[i]).split(':')[1]
+				self.state['HUM'] = HMD_str
+				self.state['TMP'] = TMP_str
+
+				#check door
+				if int(DSW_str) == 1: #door is closed
+					self.state['DOOR'] = 'N'
+
+				#check receptacle
+				level = 0
+				shell_IRs = [SIR1_str, SIR2_str, SIR3_str]
+				for IR in shell_IRs:
+					if int(IR) == 1:
+						level += 1
+				self.state['VOL'] = level
+				self.state['LCLIFF'] = LCLIFF_str
+				self.state['RCLIFF'] = R_CLIFF_str
+				self.state['BATL'] = BATL_str
+			'''
+
+			tell_arduino()
+
+
+
 		def set_defaults():
-			self.door = 'N' #trash door: N = neutral (closed), C = closing, O1 = opening, O = neutral(open)
+			self.door = 'C' #trash door: N = neutral (closed), C = closing, O1 = opening, O = neutral(open)
 			self.control = 'M' #control type: A = auto, M = manual
 			self.last_cmd = time()
 			self.c_acc = 0 #comb acceleration
@@ -212,7 +273,8 @@ class App():
 						self.state['CMO'] = 'R'
 					else:
 						self.state['CMO'] = 'N'
-					sleep(0.1)
+					hello_arduino()
+					sleep(0.005)
 					#collision_avoidance()
 					#print self.state['FDIST'], self.state['FCLR'], self.state['BDIST'], self.state['BCLR']
 
@@ -308,16 +370,54 @@ class App():
 				w.start()
 				
 
-				
-				 									
-
 		def tell_arduino():
-			string = 'CMO:%s||LMO:%s||RMO:%s||DOOR:%s||F_LED:%s||L_LED:%s||R_LED:%s||B_LED:%s' %(self.c_acc, self.l_acc, self.r_acc, self.door, self.F_LED, self.L_LED, self.R_LED, self.B_LED)
-			if string != self.command:
-				self.command = string
-				print self.command
-				eh.motor.one.speed(self.l_acc)
-				eh.motor.two.speed(self.l_acc)
+			string = 'CMO:%s|LMO:%s|RMO:%s|DOOR:%s|F_LED:%s|L_LED:%s|R_LED:%s|B_LED:%s&' %(self.c_acc, self.l_acc, self.r_acc, self.door, self.F_LED, self.L_LED, self.R_LED, self.B_LED)
+			#if string != self.command:
+			self.command = string
+			print self.command
+			#LEDS
+			if self.F_LED != 0:
+				arduino.write('6001')
+			else:
+				arduino.write('6002')
+			if self.L_LED != 0:
+				arduino.write('6003')
+			else:
+				arduino.write('6004')
+			if self.R_LED != 0:
+				arduino.write('6005')
+			else:
+				arduino.write('6006')
+			if self.B_LED != 0:
+				arduino.write('6007')
+			else:
+				arduino.write('6008')
+
+			#MOTORS
+			if self.l_acc == self.r_acc: #both drive motors moving at same speed
+				output = int(1500+500*self.l_acc/100.0)
+				if output == 2000:
+					output = 1999
+				arduino.write(str(output))
+			else: #drive motors moving at different speeds
+				left = int(2500+500*self.l_acc/100.0)
+				right = int(3500+500*self.r_acc/100.0)
+				if left == 3000:
+					left = 2999
+				if right == 4000:
+					right = 3999
+				arduino.write(str(left))
+				arduino.write(str(right))
+			comb = int(4500+500*self.c_acc/100.0) #comb
+			if comb == 5000:
+				comb = 4999
+			arduino.write(str(comb))
+			if self.door == 'O': #door
+				arduino.write('5000')
+			elif self.door == 'C':
+				arduino.write('5999')
+
+				#arduino.write(string)
 				
 
 
