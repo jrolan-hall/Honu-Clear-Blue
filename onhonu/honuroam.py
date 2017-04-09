@@ -171,26 +171,23 @@ class App():
 			print howdy
 			try:
 				howdy = howdy[:-1].split(':')
-				tag = hail[0]
-				value = hail[1]
+				tag = howdy[0]
+				value = howdy[1]
 			except:
 				tag = None
 				value = None
 			if tag == 'SIR1':
 				if int(value) > 2:
-					level = 1
 					self.state['VOL'] = 1
 			elif tag == 'SIR2':
 				if int(value) > 2:
-					level = 2
 					self.state['VOL'] = 2
 			elif tag == 'SIR3':
 				if int(value) > 2:
-					level = 3
 					self.state['VOL'] = 3
 			elif tag == 'DSW':
 				if int(value) == 1:
-				    self.['DOOR'] = 'N'
+				    self.state['DOOR'] = 'N'
 			elif tag == 'FCLF':
 				self.state['FCLIFF'] = value
 			elif tag == 'BCLF':
@@ -290,7 +287,7 @@ class App():
 
 
 		def flash_LED(LED, color):
-			LED = color
+			#LED = color
 			tell_arduino()
 			sleep(0.2)
 
@@ -477,8 +474,6 @@ class App():
 			onboard.waitalert2()
 			onboard.connalert1()
 			while True:
-				while network.isConnected():		
-					talk = True
 				if network.isConnected()==False:
 					onboard.connalert2()
 					print 'Disconnected. Waiting for connection'
