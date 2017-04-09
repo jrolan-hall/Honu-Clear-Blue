@@ -131,13 +131,9 @@ class App():
 				#toggle door
 				if self.keyval['CROSS_btn'] and self.control == 'M':
 					if self.door == 'N':
-						self.door = 'O1'
-					elif self.door == 'O1':
-						self.door = 'C'
+						self.door = 'O'
 					elif self.door == 'O':
 						self.door = 'C'
-					elif self.door == 'C':
-						self.door = 'O1'
 
 
 			if self.control == 'M':			
@@ -235,7 +231,7 @@ class App():
 
 
 		def set_defaults():
-			self.door = 'N' #trash door: N = neutral (closed), C = closing, O1 = opening, O = neutral(open)
+			self.door = 'C' #trash door: N = neutral (closed), C = closing, O1 = opening, O = neutral(open)
 			self.control = 'M' #control type: A = auto, M = manual
 			self.last_cmd = time()
 			self.c_acc = 0 #comb acceleration
@@ -416,12 +412,10 @@ class App():
 			if comb == 5000:
 				comb = 4999
 			arduino.write(str(comb))
-			if self.door == 'O1' or 'O': #door
+			if self.door == 'O': #door
 				arduino.write('5000')
 			elif self.door == 'C':
 				arduino.write('5999')
-			elif self.door == 'N'
-				arduino.write('5500')
 
 				#arduino.write(string)
 				

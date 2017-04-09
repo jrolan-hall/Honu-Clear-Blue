@@ -5,7 +5,7 @@ from datetime import datetime
 from math import atan2, pi, asin, cos, sqrt
 import Adafruit_LSM303
 
-lsm303 = Adafruit_LSM303.LSM303()
+#lsm303 = Adafruit_LSM303.LSM303()
 
 def output():
 	return str(random())
@@ -134,6 +134,7 @@ def sense_DATA():
 		packet["TMP"]="00" #dummy
 
 	#BEARING
+	"""
 	accel, mag = lsm303.read()
 	accel_x, accel_y, accel_z = accel
 	mag_x, mag_z, mag_y = mag
@@ -141,9 +142,10 @@ def sense_DATA():
 	Ayn = accel_y/sqrt(accel_x**2 + accel_y**2 + accel_z**2)
 	pitch = asin(-Axn)
 	roll = asin(Ayn/cos(pitch))
-	packet['PITCH'] = pitch*180/pi
-	packet['ROLL'] = roll*180/pi
-	packet['BEAR'] = 180*atan2(mag_y, mag_x)/pi	#calculate bearing	
+	"""
+	packet['PITCH'] = 1#pitch*180/pi
+	packet['ROLL'] = 1#roll*180/pi
+	packet['BEAR'] = 1#180*atan2(mag_y, mag_x)/pi	#calculate bearing	
 	
 	
 	#ALTITUDE, LATITUDE, LONGITUDE
