@@ -190,7 +190,7 @@ class App():
 					self.state['VOL'] = 3
 			elif tag == 'DSW':
 				if int(value) == 1:
-					self.['DOOR'] = 'N'
+				    self.['DOOR'] = 'N'
 			elif tag == 'FCLF':
 				self.state['FCLIFF'] = value
 			elif tag == 'BCLF':
