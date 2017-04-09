@@ -130,7 +130,7 @@ class App():
 						self.c_acc = 0
 				#toggle door
 				if self.keyval['CROSS_btn'] and self.control == 'M':
-					if self.door == 'N':
+					if self.door == 'C':
 						self.door = 'O'
 					elif self.door == 'O':
 						self.door = 'C'
