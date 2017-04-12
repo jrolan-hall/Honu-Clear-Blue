@@ -24,9 +24,9 @@ void setup() {
   pinMode(7, OUTPUT); //left LED on pin 7
   pinMode(8, OUTPUT); //right LED on pin 8
   pinMode(10, OUTPUT); //back LED on pin 10
-  CMO.attach(3);      //comb motor on PWM input 3
+  CMO.attach(11);      //comb motor on PWM input 3
   LMO.attach(9);      //left motor on PWM input 5 (changed to door)
-  RMO.attach(6);      //right motor on PWM input 6
+  RMO.attach(3);      //right motor on PWM input 6
   DMO.attach(5);      //door motor on PWM input 9 (changed to left)
 }
 
@@ -63,7 +63,18 @@ void loop() {
   if ((action >= 1000) && (action <= 1999)) //both drive motors
   {
     LMO.writeMicroseconds(action);
+    if (action > 1500)
+    {
+      RMO.writeMicroseconds(1500-(action-1500));
+    }
+    else if (action < 1500)
+    {
+      RMO.writeMicroseconds(1500+(1500-action));
+    }
+    else if (action == 1500)
+    {
     RMO.writeMicroseconds(action);
+    }
     Serial.println("DRIVE:" + command);
   }
   else if ((action >= 2000) && (action <= 2999)) //left motor

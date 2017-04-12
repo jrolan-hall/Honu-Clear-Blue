@@ -125,7 +125,7 @@ class App():
 				#toggle comb motor on/off
 				if self.keyval['CIRCL_btn'] and self.control == 'M':
 					if self.c_acc == 0:
-						self.c_acc = 100
+						self.c_acc = -30
 					else:
 						self.c_acc = 0
 				#toggle door
@@ -398,7 +398,7 @@ class App():
 				arduino.write(str(output))
 			else: #drive motors moving at different speeds
 				left = int(2500+500*self.l_acc/100.0)
-				right = int(3500+500*self.r_acc/100.0)
+				right = int(3500+500*self.r_acc*(-1)/100.0)
 				if left == 3000:
 					left = 2999
 				if right == 4000:
