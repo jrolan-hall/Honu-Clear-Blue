@@ -271,7 +271,7 @@ class App():
 					else:
 						self.state['CMO'] = 'N'
 					hello_arduino()
-					sleep(0.005)
+					sleep(0.1)
 					#collision_avoidance()
 					#print self.state['FDIST'], self.state['FCLR'], self.state['BDIST'], self.state['BCLR']
 
