@@ -371,7 +371,7 @@ class App():
 			string = 'CMO:%s|LMO:%s|RMO:%s|DOOR:%s|F_LED:%s|L_LED:%s|R_LED:%s|B_LED:%s&' %(self.c_acc, self.l_acc, self.r_acc, self.door, self.F_LED, self.L_LED, self.R_LED, self.B_LED)
 			#if string != self.command:
 			self.command = string
-			print self.command
+			#print self.command
 			#LEDS
 			if self.F_LED != 0:
 				arduino.write('6001\n')
@@ -391,6 +391,7 @@ class App():
 				arduino.write('6008\n')
 
 			#MOTORS
+			print 'LEFT: %s, RIGHT: %s, COMB: %s, DOOR: %s'
 			if self.l_acc == self.r_acc: #both drive motors moving at same speed
 				output = int(1500+500*self.l_acc/100.0)
 				if output == 2000:
