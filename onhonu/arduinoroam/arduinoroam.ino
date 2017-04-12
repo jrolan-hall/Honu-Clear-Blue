@@ -195,5 +195,5 @@ void loop() {
   //      toprint = "TMP:"+String(TMP);
   //      Serial.println(toprint);
   //    }
-  delay(2);
+  delay(10);
 }

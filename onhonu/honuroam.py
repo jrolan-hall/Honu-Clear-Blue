@@ -223,7 +223,7 @@ class App():
 				self.state['BATL'] = BATL_str
 			'''
 
-			tell_arduino()
+			#tell_arduino()
 
 
 
