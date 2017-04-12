@@ -391,7 +391,7 @@ class App():
 				arduino.write('6008\n')
 
 			#MOTORS
-			print 'LEFT: %s, RIGHT: %s, COMB: %s, DOOR: %s'
+			print 'LEFT: %s, RIGHT: %s, COMB: %s, DOOR: %s' %(self.l_acc, self.r_acc, self.c_acc, self.door)
 			if self.l_acc == self.r_acc: #both drive motors moving at same speed
 				output = int(1500+500*self.l_acc/100.0)
 				if output == 2000:
