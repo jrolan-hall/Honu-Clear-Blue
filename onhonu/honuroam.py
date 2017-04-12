@@ -108,7 +108,7 @@ class App():
 		    self.command = 'CMO:0||LMO:0||RMO:0||DOOR:0'		
 
 		def pass_command():
-			if (self.new_cmd - self.last_cmd) > 0.1:
+			if (self.new_cmd - self.last_cmd) > 0.33:
 				self.last_cmd = self.new_cmd
 
 				#check control
@@ -142,15 +142,15 @@ class App():
 				self.turn = scale_stick(self.keyval['LEFTX_stk'])
 				self.pivot = self.keyval['SQUAR_btn']
 
-				#sensitivity threshold of 15% kept both motors turning okay
-				if (abs(self.turn)>0.15) and (self.pivot==0): #no pivot turn - 1 wheel stationary
+				#sensitivity threshold of 20% kept both motors turning okay
+				if (abs(self.turn)>0.20) and (self.pivot==0): #no pivot turn - 1 wheel stationary
 					if self.turn < 0: #left turn - right motor fwd/rev, left motor stationary
 						self.l_acc = 0
 						self.r_acc = int(self.acc*-1*self.turn)
 					elif self.turn > 0: #right turn - right motor fwd/rev, right motor stationary
 						self.r_acc = 0
 						self.l_acc = int(self.acc*self.turn)
-				elif (abs(self.turn)>0.15) and (self.pivot!=0):
+				elif (abs(self.turn)>0.20) and (self.pivot!=0):
 					if self.turn < 0: #left turn - right motor fwd/rev, left motor oppose
 						self.l_acc = int(self.turn*self.acc)
 						self.r_acc = int(-1*self.turn*self.acc)
@@ -375,20 +375,28 @@ class App():
 			#LEDS
 			if self.F_LED != 0:
 				arduino.write('6001\n')
+				sleep(0.1)
 			else:
 				arduino.write('6002\n')
+				sleep(0.1)
 			if self.L_LED != 0:
 				arduino.write('6003\n')
+				sleep(0.1)
 			else:
 				arduino.write('6004\n')
+				sleep(0.1)
 			if self.R_LED != 0:
 				arduino.write('6005\n')
+				sleep(0.1)
 			else:
 				arduino.write('6006\n')
+				sleep(0.1)
 			if self.B_LED != 0:
 				arduino.write('6007\n')
+				sleep(0.1)
 			else:
 				arduino.write('6008\n')
+				sleep(0.1)
 
 			#MOTORS
 			print 'LEFT: %s, RIGHT: %s, COMB: %s, DOOR: %s' %(self.l_acc, self.r_acc, self.c_acc, self.door)
@@ -397,6 +405,7 @@ class App():
 				if output == 2000:
 					output = 1999
 				arduino.write(str(output)+'\n')
+				sleep(0.1)
 			else: #drive motors moving at different speeds
 				left = int(2500+500*self.l_acc/100.0)
 				right = int(3500+500*self.r_acc*(-1)/100.0)
@@ -405,15 +414,19 @@ class App():
 				if right == 4000:
 					right = 3999
 				arduino.write(str(left)+'\n')
+				sleep(0.1)
 				arduino.write(str(right)+'\n')
+				sleep(0.1)
 			comb = int(4500+500*self.c_acc/100.0) #comb
 			if comb == 5000:
 				comb = 4999
 			arduino.write(str(comb)+'\n')
 			if self.door == 'O': #door
 				arduino.write('5000\n')
+				sleep(0.1)
 			elif self.door == 'C':
 				arduino.write('5999\n')
+				sleep(0.1)
 
 				#arduino.write(string)
 				
