@@ -424,10 +424,10 @@ class App():
 				comb = 4999
 			arduino.write(str(comb)+'\n')
 			if self.door == 'O': #door
-				arduino.write('5000\n')
+				arduino.write('5999\n')
 				sleep(0.1)
 			elif self.door == 'C':
-				arduino.write('5999\n')
+				arduino.write('5000\n')
 				sleep(0.1)
 
 				#arduino.write(string)

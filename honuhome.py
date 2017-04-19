@@ -2584,10 +2584,10 @@ class App():
             if turn != 0: #turning
                 if (output > 1500): #forwards turning
                     if (output < 1899): #slow speed turning
-                        if turn < 0: #left turn
+                        if turn > 0: #right turn
                             output += 1100
                             self.send_command(output)
-                        elif turn > 0: #right turn
+                        elif turn < 0: #left turn
                             output += 2100
                             self.send_command(output)
                     elif output > 1600: #high speed turning
