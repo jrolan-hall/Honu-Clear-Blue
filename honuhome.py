@@ -80,6 +80,7 @@ class App():
         self.init_anchor_select_screen()
         self.init_anchor_confirmation_screen()
         self.init_main_screen()
+        self.init_control_screen()
         self.init_analytics()
         self.init_weather_forecast()
         self.init_checks()   
@@ -1305,7 +1306,7 @@ class App():
                 self.call_honu()
                 if ctrlques:
                     self.pop3active = True
-                    self.raise_frame(self.fr7)
+                    self.raise_frame(self.fr8)
                 else:
                     self.raise_frame(self.fr2)
                 self.play('./sounds/connect.wav', sfn)
@@ -1315,7 +1316,7 @@ class App():
                 self.play('./sounds/connectno.wav', sfn)
                 if self.remotename == 'localhost': #get rid of this later
                     if ctrlques:
-                        self.raise_frame(self.fr7)
+                        self.raise_frame(self.fr8)
                     else:
                         self.raise_frame(self.fr2)
         elif self.remotestatus == 'inactive':
@@ -2273,7 +2274,7 @@ class App():
         self.datacount = 0
         self.sessionstr = '  Hostname: ' + self.hostname + '  | Host Address: ' + self.hostaddress + '  | Remote: ' + self.remotename + '  | Remote Address: ' + self.remoteaddress + '  | Sent: ' + str(self.outcount) + '  | Received: ' + str(self.incount) + '  |Data Exchanged: ' + str(self.datacount)
         self.session = tk.Label(self.fr7, text=self.sessionstr, font=self.fn0, bg='#323232', fg='white')
-        self.session.grid(row=12,column=1, columnspan=16, sticky='W')
+        self.session.grid(row=12,column=1, columnspan=15, sticky='W')
         #copyright info
         self.foot = tk.Label(self.fr7, text='Copyright '+ u'\xa9' + ' 2017', font=self.fn1, bg='#323232', fg='white')
         self.foot.grid(row=14,columnspan=16)
@@ -2492,5 +2493,176 @@ class App():
         if self.Play:
             Play(path, extra)
 
+    def init_control_screen(self):
+        """Initializes the main menu screen"""
+        #initialize values
+        self.comb_state = False
+        self.door_state = False
+        self.e_stop_state = False
+        self.pivot_state = False
+        self._turn = None
+        self._thrust = None
+
+        #declare widgets
+            #header
+        self.control_exit_btn = tk.Button(self.fr8, text='X', font=self.fn0, bg='#DB4437', fg='#FFFFFF', relief='flat', command=lambda:self.raise_frame(self.fr7))
+        self.control_label = tk.Label(self.fr8, text='REMOTE CONTROL', font=self.fn2, bg='#DB4437', fg='#FFFFFF')
+
+        	#movement
+        self.steering = tk.Scale(self.fr8, from_=-100, to=100, orient=tk.HORIZONTAL, length=250, sliderrelief=tk.FLAT, highlightthickness=5, command=self.turning)
+        self.thrust = tk.Scale(self.fr8, from_=-100, to=100, orient=tk.VERTICAL, length=250, sliderrelief=tk.FLAT, highlightthickness=5, command=self.thrusting)
+
+        self.steering_L = tk.Label(self.fr8, text='L', font=self.fn0, bg='#33B679', fg='#FFFFFF')
+        self.steering_R = tk.Label(self.fr8, text='R', font=self.fn0, bg='#33B679', fg='#FFFFFF')
+        self.thrust_F = tk.Label(self.fr8, text='F', font=self.fn0, bg='#33B679', fg='#FFFFFF')
+        self.thrust_N = tk.Label(self.fr8, text='N', font=self.fn0, bg='#33B679', fg='#FFFFFF')
+        self.thrust_R = tk.Label(self.fr8, text='R', font=self.fn0, bg='#33B679', fg='#FFFFFF')
+
+        self.pivot_btn = tk.Button(self.fr8, text='PIVOT', font=self.fn0, bg='#DB4437', fg='#FFFFFF', command=lambda:self.toggle_pivot())
+
+        	#comb and door
+        self.comb_btn = tk.Button(self.fr8, text='COMB', font=self.fn0, bg='#DB4437', fg='#FFFFFF', command=lambda:self.toggle_comb())
+        self.door_btn = tk.Button(self.fr8, text='DOOR', font=self.fn0, bg='#DB4437', fg='#FFFFFF', command=lambda:self.toggle_door())
+
+        	#e-stop
+        self.e_stop_btn = tk.Button(self.fr8, text='STOP!', font=self.fn0, bg='#DB4437', fg='#FFFFFF', command=lambda:self.estop())
+
+        '''
+        #apply spacing
+        for i in range(0, 7):
+            self.fr8.rowconfigure(i, pad=80)
+            self.fr8.columnconfigure(i, pad=80)
+        '''
+
+        #grid widgets
+            #header
+        self.control_exit_btn.grid(row=0, column=0, sticky='NEWS')
+        self.control_label.grid(row=0, column=1, columnspan=10, sticky='NEWS')
+
+        	#movement
+        self.steering.grid(row=2, column=2, columnspan=5, sticky='EW')
+        self.thrust.grid(row=4, column=4, rowspan=5, sticky='NS')
+
+        self.steering_L.grid(row=1, column=2)
+        self.steering_R.grid(row=1, column=6)
+        self.thrust_F.grid(row=4, column=5)
+        self.thrust_N.grid(row=6, column=5)
+        self.thrust_R.grid(row=8, column=5)
+
+        self.pivot_btn.grid(row=1, column=4)
+
+        	#comb and door
+        self.comb_btn.grid(row=4, column=1)
+        self.door_btn.grid(row=4, column=7)
+
+        	#e-stop
+        self.e_stop_btn.grid(row=6, column=7, rowspan=3, columnspan=3)
+
+
+    def turning(self, event):
+        if self._turn:
+            self.fr8.after_cancel(self._turn)
+        self._turn = self.fr8.after(5, self.update_turn)
+    
+    def thrusting(self, event):
+        if self._thrust:
+            self.fr8.after_cancel(self._thrust)
+        self._turn = self.fr8.after(5, self.update_thrust)
+         
+                       
+    def update_turn(self):
+        self.update_thrust()
+
+    def update_thrust(self):
+        thrust = self.thrust.get()
+        turn = self.steering.get()
+        if thrust != 0: #forward and backwards
+            output = int(1500-500*thrust/100.0)
+            if output == 2000:
+                output = 1999
+            self.send_command(output)
+            if turn != 0: #turning
+                if (output > 1500): #forwards turning
+                    if (output < 1899): #slow speed turning
+                        if turn < 0: #left turn
+                            output += 1100
+                            self.send_command(output)
+                        elif turn > 0: #right turn
+                            output += 2100
+                            self.send_command(output)
+                    elif output > 1600: #high speed turning
+                        if turn < 0: #left turn
+                            output += 900
+                            self.send_command(output)
+                        elif turn > 0: #right turn
+                            output += 1900
+                            self.send_command(output) 
+                #reverse turning                   
+        elif thrust == 0:
+            output = 1500
+            
+
+    def toggle_pivot(self):
+	if self.pivot_state == False:
+	    self.pivot_state = True
+	    self.pivot_btn.configure(bg='#33B679')
+            print 'pivoting'
+        elif self.pivot_state == True:
+	    self.pivot_state = False
+	    self.pivot_btn.configure(bg='#DB4437')
+            print 'no pivot'
+
+
+    def toggle_comb(self):
+	if self.comb_state == False:
+	    self.comb_state = True
+	    self.comb_btn.configure(bg='#33B679')
+	    print 'comb on'
+	    output = 4350
+	    self.send_command(output)
+        elif self.comb_state == True:
+	    self.comb_state = False
+	    self.comb_btn.configure(bg='#DB4437')
+	    print 'comb off'
+	    output = 4500
+	    self.send_command(output)
+
+	
+    def toggle_door(self):
+	if self.door_state == False:
+	    self.door_state = True
+	    self.door_btn.configure(bg='#33B679')
+	    print 'door open'
+	    output = 5999
+	    self.send_command(output)
+	elif self.door_state == True:
+	    self.door_state = False
+	    self.door_btn.configure(bg='#DB4437')
+	    print 'door closed'
+	    output = 5000
+	    self.send_command(output)
+	
+
+    def estop(self):
+	if self.e_stop_state == False:
+	    self.e_stop_state = True
+	    self.e_stop_btn.configure(bg='#33B679')
+	    print 'emergency stop engaged'
+	    output = 6000
+	    self.send_command(output)
+	elif self.e_stop_state == True:
+	    self.e_stop_state = False
+	    self.e_stop_btn.configure(bg='#DB4437')
+	    print 'emergency stop disengaged'
+
+
+    def send_command(self, code):
+        '''Sends command to Honu'''
+        sleep(0.01)
+        send = {}
+        send['MSG'] = 'SER'
+        send['CMD'] = code
+        self.tell_honu(str(send))
+        
 
 app=App()

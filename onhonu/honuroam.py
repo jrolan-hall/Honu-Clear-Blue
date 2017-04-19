@@ -42,6 +42,8 @@ class App():
 									#print 'no home connection'
 						x = threading.Thread(target=data_loop)
 						x.start()
+				elif self.homemsg['MSG'] == 'SER':
+				    arduino.write(self.homemsg['CMD'])
 		  		else:
 		  			print"NO CONNECTION TO RESPOND"
 
