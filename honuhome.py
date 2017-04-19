@@ -2661,7 +2661,7 @@ class App():
         sleep(0.01)
         send = {}
         send['MSG'] = 'SER'
-        send['CMD'] = code
+        send['CMD'] = str(code)+'\n'
         self.tell_honu(str(send))
         
 

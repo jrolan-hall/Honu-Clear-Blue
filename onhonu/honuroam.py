@@ -31,7 +31,7 @@ class App():
 									#print"RESPONSE:" + str(response)
 									try:
 										network.say(str(response))
-										print response
+										#print response
 									except:
 										pass
 										#print 'could not send message'
