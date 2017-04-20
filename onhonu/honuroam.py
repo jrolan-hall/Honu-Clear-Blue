@@ -498,14 +498,14 @@ class App():
 				pass
       		    """
      		    while True:
-     		         sleep(0.1)
+     		         sleep(0.012)
      		         r,w,x = select([self.gamepad], [], [])
      		         for event in self.gamepad.read():
 			     for key in self.allkeys:
 			    	[etype, ecode] = self.allkeys[key]
 				if event.type == etype and event.code == ecode:
 		    		    self.keyval[key] = event.value
-		    	     print self.keyval['CROSS_btn'], self.keyval['SQUAR_btn'], self.keyval['TRIAN_btn'], self.keyval['CIRCL_btn']
+		    	     pass_command()
       		    
 	   	############ this is where the program starts its loop
 	    			
