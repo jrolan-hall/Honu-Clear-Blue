@@ -150,7 +150,7 @@ class App():
 
 			self.pivot = self.keyval['CROSS_btn']
 
-			self.acc = scale_trigger(self.keyval['RIHT2_trg'])-scale_trigger(self.keyval['LEFT2_trg'])
+			self.acc = scale_trigger(self.keyval['LEFT2_trg'])-scale_trigger(self.keyval['RIHT2_trg'])
 
 			self.turn = 0
 
@@ -498,7 +498,7 @@ class App():
 				pass
       		    """
      		    while True:
-     		         sleep(0.012)
+     		         sleep(0.1)
      		         r,w,x = select([self.gamepad], [], [])
      		         for event in self.gamepad.read():
 			     for key in self.allkeys:
