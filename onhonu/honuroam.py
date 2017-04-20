@@ -110,75 +110,72 @@ class App():
 		    self.command = 'CMO:0||LMO:0||RMO:0||DOOR:0'		
 
 		def pass_command():
-			if (self.new_cmd - self.last_cmd) > 0.01:
-				self.last_cmd = self.new_cmd
+			if self.keyval['START_btn']: #manual mode
+				self.control = 'M'
 
-				if self.keyval['START_btn']: #manual mode
-					self.control = 'M'
+			if self.keyval['SELCT_btn']: #auto mode
+				self.control = 'A'
 
-				if self.keyval['SELCT_btn']: #auto mode
-					self.control = 'A'
+			if self.keyval['CIRCL_btn']: #lock motors
+				sleep(0.012)
+				arduino.write('6000\n')
 
-				if self.keyval['CIRCL_btn']: #lock motors
-					sleep(0.012)
-					arduino.write('6000\n')
+			if self.keyval['TRIAN_btn']: #door open - drive motors stop to do this
+				sleep(0.012)
+				arduino.write('1500\n')
+				sleep(0.012)
+				arduino.write('5999\n')
 
-				if self.keyval['TRIAN_btn']: #door open - drive motors stop to do this
-					sleep(0.012)
-					arduino.write('1500\n')
-					sleep(0.012)
-					arduino.write('5999\n')
+			if self.keyval['SQUAR_btn']: #door close - drive motors stop to do this
+				sleep(0.012)
+				arduino.write('1500\n')
+				sleep(0.012)
+				arduino.write('5000\n')
 
-				if self.keyval['SQUAR_btn']: #door close - drive motors stop to do this
-					sleep(0.012)
-					arduino.write('1500\n')
-					sleep(0.012)
-					arduino.write('5000\n')
+			if self.keyval['UPARR_btn']: #comb on
+				sleep(0.012)
+				arduino.write('4350\n')
 
-				if self.keyval['UPARR_btn']: #comb on
-					sleep(0.012)
-					arduino.write('4350\n')
+			if self.keyval['DOWNA_btn']: #comb off
+				sleep(0.012)
+				arduino.write('4500\n')
 
-				if self.keyval['DOWNA_btn']: #comb off
-					sleep(0.012)
-					arduino.write('4500\n')
+			self.pivot = self.keyval['CROSS_btn']
 
-				self.pivot = self.keyval['CROSS_btn']
+			self.acc = scale_trigger(self.keyval['RIHT2_trg'])-scale_trigger(self.keyval['LEFT2_trg'])
 
-				self.acc = scale_trigger(self.keyval['RIHT2_trg'])-scale_trigger(self.keyval['LEFT2_trg'])
+			self.turn = 0
 
+			if self.keyval['RIGHT_btn']:
+				self.turn = 1 #right
+
+			if self.keyval['LEFTA_btn']:
+				self.turn = -1 #left
+
+			if self.keyval['RIGHT_btn'] and self.keyval['LEFTA_btn']:
 				self.turn = 0
 
-				if self.keyval['RIGHT_btn']:
-					self.turn = 1 #right
-
-				if self.keyval['LEFTA_btn']:
-					self.turn = -1 #left
-
-				if self.keyval['RIGHT_btn'] and self.keyval['LEFTA_btn']:
-					self.turn = 0
-
-		        output = int(1500-500*self.acc/100.0)
-		        if output > 1999:
-		            output = 1999
-		        if (self.acc != 0) and (self.turn == 0): #forward and backwards at same speed
-		            arduino.write(str(output)+'\n')
-		        elif (self.acc != 0) and (self.turn != 0) and (self.pivot == False):
-		            if (output != 1500):
-		                if self.turn > 0: #right turn - left wheel moves, right wheel stops
-		                    arduino.write('3500\n')
-		                elif self.turn < 0: #left turn - right wheel moves, left wheel stops
-		                    arduino.write('2500\n')
-		        elif (self.acc != 0) and (self.turn != 0) and (self.pivot == True):
-		            if (output != 1500):
-		                if self.turn > 0: #right turn - left wheel moves, right wheel reverse
-		                    r_out = 3500 + (output - 1500)
-		                    arduino.write(str(r_out)+'\n')
-		                elif self.turn < 0: #left turn - right wheel moves, left wheel reverse
-		                    l_out = 2500 - (output - 1500)
-		                    arduino.write(str(l_out)+'\n')
-		        else:
-		            arduino.write('1500\n')
+	        output = int(1500-500*self.acc/100.0)
+	        if output > 1999:
+	            output = 1999
+	        if (self.acc != 0) and (self.turn == 0): #forward and backwards at same speed
+	            arduino.write(str(output)+'\n')
+	        elif (self.acc != 0) and (self.turn != 0) and (self.pivot == False):
+	            if (output != 1500):
+	                if self.turn > 0: #right turn - left wheel moves, right wheel stops
+	                    arduino.write('3500\n')
+	                elif self.turn < 0: #left turn - right wheel moves, left wheel stops
+	                    arduino.write('2500\n')
+	        elif (self.acc != 0) and (self.turn != 0) and (self.pivot == True):
+	            if (output != 1500):
+	                if self.turn > 0: #right turn - left wheel moves, right wheel reverse
+	                    r_out = 3500 + (output - 1500)
+	                    arduino.write(str(r_out)+'\n')
+	                elif self.turn < 0: #left turn - right wheel moves, left wheel reverse
+	                    l_out = 2500 - (output - 1500)
+	                    arduino.write(str(l_out)+'\n')
+	        else:
+	            arduino.write('1500\n')
 
 
 
@@ -246,11 +243,9 @@ class App():
 		def set_defaults():
 			self.door = 'C' #trash door: N = neutral (closed), C = closing, O1 = opening, O = neutral(open)
 			self.control = 'M' #control type: A = auto, M = manual
-			self.last_cmd = time()
 			self.c_acc = 0 #comb acceleration
 			self.l_acc = 0
 			self.r_acc = 0
-			self.ctrl_swap = time()
 			self.obl = False
 
 			#ready to connect light show
@@ -476,8 +471,6 @@ class App():
 
 		    try:
 				for event in self.gamepad.read_loop():
-					if event.code != 59 and event.code !=60:
-						self.new_cmd = time()
 					for key in self.allkeys:
 						[etype, ecode] = self.allkeys[key]
 						if event.type == etype and event.code == ecode:
