@@ -147,12 +147,12 @@ class App():
 					self.turn = 1 #right
 
 				if self.keyval['LEFTA_btn']:
-					self.turn = -1
+					self.turn = -1 #left
 
 				if self.keyval['RIGHT_btn'] and self.keyval['LEFTA_btn']:
 					self.turn = 0
 
-		        output = int(1500-500*thrust/100.0)
+		        output = int(1500-500*self.acc/100.0)
 		        if output > 1999:
 		            output = 1999
 		        if (self.acc != 0) and (self.turn == 0): #forward and backwards at same speed
