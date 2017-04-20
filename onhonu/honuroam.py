@@ -111,42 +111,49 @@ class App():
 		    self.command = 'CMO:0||LMO:0||RMO:0||DOOR:0'		
 
 		def pass_command():
-			if self.keyval['START_btn']: #manual mode
+			if self.keyval['START_btn']==True: #manual mode
 				self.control = 'M'
+				print 'M control'
 
-			if self.keyval['SELCT_btn']: #auto mode
+			if self.keyval['SELCT_btn']==True: #auto mode
 				self.control = 'A'
+				print 'A control'
 
-			if self.keyval['CIRCL_btn']: #lock motors
+			if self.keyval['CIRCL_btn']==True: #lock motors
 				sleep(0.012)
 				arduino.write('6000\n')
 				self.l_acc = 0
 				self.r_acc = 0
 				self.c_acc = 0
+				print 'Locked'
 
-			if self.keyval['TRIAN_btn']: #door open - drive motors stop to do this
-				sleep(0.012)
+			if self.keyval['TRIAN_btn']==True: #door open - drive motors stop to do this
+				#sleep(0.012)
 				arduino.write('1500\n')
-				sleep(0.012)
+				#sleep(0.012)
 				arduino.write('5999\n')
 				self.door = 'O'
+				print 'door open'
 
-			if self.keyval['SQUAR_btn']: #door close - drive motors stop to do this
-				sleep(0.012)
+			if self.keyval['SQUAR_btn']==True: #door close - drive motors stop to do this
+				#sleep(0.012)
 				arduino.write('1500\n')
-				sleep(0.012)
+				#sleep(0.012)
 				arduino.write('5000\n')
 				self.door = 'C'
+				print 'door close'
 
-			if self.keyval['UPARR_btn']: #comb on
-				sleep(0.012)
+			if self.keyval['UPARR_btn']==True: #comb on
+				#sleep(0.012)
 				arduino.write('4350\n')
 				self.c_acc = 1
+				print 'comb on'
 
-			if self.keyval['DOWNA_btn']: #comb off
-				sleep(0.012)
+			if self.keyval['DOWNA_btn']==True: #comb off
+				#sleep(0.012)
 				arduino.write('4500\n')
 				self.c_acc = 0
+				print 'comb off'
 
 			self.pivot = self.keyval['CROSS_btn']
 
@@ -154,16 +161,19 @@ class App():
 
 			self.turn = 0
 
-			if self.keyval['RIGHT_btn']:
+			if self.keyval['RIGHT_btn']==True:
 				self.turn = 1 #right
+				print 'right turn'
 
-			if self.keyval['LEFTA_btn']:
+			if self.keyval['LEFTA_btn']==True:
 				self.turn = -1 #left
+				print 'left turn'
 
-			if self.keyval['RIGHT_btn'] and self.keyval['LEFTA_btn']:
+			if (self.keyval['RIGHT_btn']==True) and (self.keyval['LEFTA_btn']==True):
 				self.turn = 0
 
                	        output = int(1500-500*self.acc/100.0)
+               	        print 'drive: '+str(output)
                	        if output > 1999:
                	            output = 1999
                	        if (self.acc != 0) and (self.turn == 0): #forward and backwards at same speed
@@ -199,7 +209,7 @@ class App():
 
 		def hello_arduino():
 			howdy = arduino.readline()
-			print howdy
+			#print howdy
 			try:
 				howdy = howdy[:-1].split(':')
 				tag = howdy[0]
