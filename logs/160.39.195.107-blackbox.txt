@@ -1,0 +1,2 @@
+
+{'TMP': '00', 'CMO': 'N', 'BAT': 'E', 'FCLR': '1', 'CTRL': 'M', 'BATL': '00', 'LON': '37.72033', 'CMB': 'N', 'VNODE': '7', 'MSG': 'DATA', 'RNODE': '93', 'DATE': '2017-Apr-20', 'BCLR': '1', 'HUM': '00', 'BDIST': '1.43', 'RCLR': 'N', 'RACC': 15, 'LLED': 'G', 'SPD': '00', 'RMO': 'F', 'LACC': 15, 'RLED': 'G', 'DOOR': 'C', 'FDIST': '1.454', 'PITCH': 1, 'BEAR': 1, 'LMO': 'F', 'CACC': 0, 'FLED': 'G', 'BLED': 'G', 'VOL': 'E', 'LCLR': 'N', 'TIME': '02:58:20 PM', 'LAT': '40.95944', 'ALT': '188', 'INDI': 'N', 'ROLL': 1}

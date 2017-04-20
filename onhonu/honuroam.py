@@ -485,14 +485,18 @@ class App():
 		    set_defaults()
 		    tell_arduino()
 		    control_wait()
+		    self.last_cmd = time()
 
 		    try:
 				for event in self.gamepad.read_loop():
+					self.new_cmd = time()
 					for key in self.allkeys:
 						[etype, ecode] = self.allkeys[key]
 						if event.type == etype and event.code == ecode:
 							self.keyval[key] = event.value
-					pass_command()						
+					if (self.last_cmd - self.new_cmd) > 0.2:
+						self.last_cmd = self.new_cmd
+						pass_command()						
 		    except:
 				pass
 
