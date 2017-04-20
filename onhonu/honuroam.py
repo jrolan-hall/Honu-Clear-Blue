@@ -513,7 +513,7 @@ class App():
 				pass
       		    """
      		    while True:
-     		         sleep(0.1)
+     		         sleep(0.2)
      		         r,w,x = select([self.gamepad], [], [])
      		         for event in self.gamepad.read():
 			     for key in self.allkeys:
