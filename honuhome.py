@@ -2509,7 +2509,7 @@ class App():
         self.control_label = tk.Label(self.fr8, text='REMOTE CONTROL', font=self.fn2, bg='#DB4437', fg='#FFFFFF')
 
         	#movement
-        self.steering = tk.Scale(self.fr8, from_=-100, to=100, orient=tk.HORIZONTAL, length=250, sliderrelief=tk.FLAT, highlightthickness=5, command=self.turning)
+        self.steering = tk.Scale(self.fr8, from_=-1, to=1, orient=tk.HORIZONTAL, length=250, sliderrelief=tk.FLAT, highlightthickness=5, command=self.turning)
         self.thrust = tk.Scale(self.fr8, from_=-100, to=100, orient=tk.VERTICAL, length=250, sliderrelief=tk.FLAT, highlightthickness=5, command=self.thrusting)
 
         self.steering_L = tk.Label(self.fr8, text='L', font=self.fn0, bg='#33B679', fg='#FFFFFF')
@@ -2576,30 +2576,27 @@ class App():
     def update_thrust(self):
         thrust = self.thrust.get()
         turn = self.steering.get()
-        if thrust != 0: #forward and backwards
-            output = int(1500-500*thrust/100.0)
-            if output == 2000:
-                output = 1999
+        output = int(1500-500*thrust/100.0)
+        if output > 1999:
+            output = 1999
+        if (thrust != 0) and (turn == 0): #forward and backwards at same speed
             self.send_command(output)
-            if turn != 0: #turning
-                if (output > 1500): #forwards turning
-                    if (output < 1899): #slow speed turning
-                        if turn > 0: #right turn
-                            output += 1100
-                            self.send_command(output)
-                        elif turn < 0: #left turn
-                            output += 2100
-                            self.send_command(output)
-                    elif output > 1600: #high speed turning
-                        if turn < 0: #left turn
-                            output += 900
-                            self.send_command(output)
-                        elif turn > 0: #right turn
-                            output += 1900
-                            self.send_command(output) 
-                #reverse turning                   
-        elif thrust == 0:
-            output = 1500
+        elif (thrust != 0) and (turn != 0) and (self.pivot_state == False):
+            if (output != 1500):
+                if turn > 0: #right turn - left wheel moves, right wheel stops
+                    self.send_command(3500)
+                elif turn < 0: #left turn - right wheel moves, left wheel stops
+                    self.send_command(2500)
+        elif (thrust != 0) and (turn != 0) and (self.pivot_state == True):
+            if (output != 1500):
+                if turn > 0: #right turn - left wheel moves, right wheel reverse
+                    r_out = 3500 + (output - 1500)
+                    self.send_command(r_out)
+                elif turn < 0: #left turn - right wheel moves, left wheel reverse
+                    l_out = 2500 - (output - 1500)
+                    self.send_command(l_out)
+        else:
+            self.send_command(1500)
             
 
     def toggle_pivot(self):
