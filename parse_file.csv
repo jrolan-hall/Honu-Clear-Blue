@@ -21,7 +21,7 @@ BCLR,1,./images/BIR-1.gif
 BCLR,2,./images/BIR-2.gif
 BCLR,N,./images/BIR-0.gif
 DOOR,O,./images/DOOR-2.gif
-DOOR,C,./images/DOOR-1.gif
+DOOR,C,./images/DOOR-0.gif
 DOOR,N,./images/DOOR-0.gif
 INDI,1,./images/IND-1.gif
 INDI,2,./images/IND-2.gif

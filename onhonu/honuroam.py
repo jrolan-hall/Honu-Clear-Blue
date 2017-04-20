@@ -119,26 +119,33 @@ class App():
 			if self.keyval['CIRCL_btn']: #lock motors
 				sleep(0.012)
 				arduino.write('6000\n')
+				self.l_acc = 0
+				self.r_acc = 0
+				self.c_acc = 0
 
 			if self.keyval['TRIAN_btn']: #door open - drive motors stop to do this
 				sleep(0.012)
 				arduino.write('1500\n')
 				sleep(0.012)
 				arduino.write('5999\n')
+				self.door = 'O'
 
 			if self.keyval['SQUAR_btn']: #door close - drive motors stop to do this
 				sleep(0.012)
 				arduino.write('1500\n')
 				sleep(0.012)
 				arduino.write('5000\n')
+				self.door = 'C'
 
 			if self.keyval['UPARR_btn']: #comb on
 				sleep(0.012)
 				arduino.write('4350\n')
+				self.c_acc = 1
 
 			if self.keyval['DOWNA_btn']: #comb off
 				sleep(0.012)
 				arduino.write('4500\n')
+				self.c_acc = 0
 
 			self.pivot = self.keyval['CROSS_btn']
 
@@ -160,20 +167,30 @@ class App():
                	            output = 1999
                	        if (self.acc != 0) and (self.turn == 0): #forward and backwards at same speed
                	            arduino.write(str(output)+'\n')
+               	            self.l_acc = self.acc
+               	            self.r_acc = self.acc
                	        elif (self.acc != 0) and (self.turn != 0) and (self.pivot == False):
                	            if (output != 1500):
                	                if self.turn > 0: #right turn - left wheel moves, right wheel stops
                	                    arduino.write('3500\n')
+               	                    self.r_acc = 0
+               	                    self.l_acc = self.acc
                	                elif self.turn < 0: #left turn - right wheel moves, left wheel stops
                	                    arduino.write('2500\n')
+               	                    self.l_acc = 0
+               	                    self.r_acc = self.acc
                	        elif (self.acc != 0) and (self.turn != 0) and (self.pivot == True):
                	            if (output != 1500):
                	                if self.turn > 0: #right turn - left wheel moves, right wheel reverse
                	                    r_out = 3500 + (output - 1500)
                	                    arduino.write(str(r_out)+'\n')
+               	                    self.l_acc = self.acc
+               	                    self.r_acc = -self.acc
                	                elif self.turn < 0: #left turn - right wheel moves, left wheel reverse
                	                    l_out = 2500 - (output - 1500)
                	                    arduino.write(str(l_out)+'\n')
+               	                    self.r_acc = self.acc
+               	                    self.l_acc = -self.acc
                	        else:
                	            arduino.write('1500\n')
 
