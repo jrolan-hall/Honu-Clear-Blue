@@ -155,27 +155,27 @@ class App():
 			if self.keyval['RIGHT_btn'] and self.keyval['LEFTA_btn']:
 				self.turn = 0
 
-	        output = int(1500-500*self.acc/100.0)
-	        if output > 1999:
-	            output = 1999
-	        if (self.acc != 0) and (self.turn == 0): #forward and backwards at same speed
-	            arduino.write(str(output)+'\n')
-	        elif (self.acc != 0) and (self.turn != 0) and (self.pivot == False):
-	            if (output != 1500):
-	                if self.turn > 0: #right turn - left wheel moves, right wheel stops
-	                    arduino.write('3500\n')
-	                elif self.turn < 0: #left turn - right wheel moves, left wheel stops
-	                    arduino.write('2500\n')
-	        elif (self.acc != 0) and (self.turn != 0) and (self.pivot == True):
-	            if (output != 1500):
-	                if self.turn > 0: #right turn - left wheel moves, right wheel reverse
-	                    r_out = 3500 + (output - 1500)
-	                    arduino.write(str(r_out)+'\n')
-	                elif self.turn < 0: #left turn - right wheel moves, left wheel reverse
-	                    l_out = 2500 - (output - 1500)
-	                    arduino.write(str(l_out)+'\n')
-	        else:
-	            arduino.write('1500\n')
+               	        output = int(1500-500*self.acc/100.0)
+               	        if output > 1999:
+               	            output = 1999
+               	        if (self.acc != 0) and (self.turn == 0): #forward and backwards at same speed
+               	            arduino.write(str(output)+'\n')
+               	        elif (self.acc != 0) and (self.turn != 0) and (self.pivot == False):
+               	            if (output != 1500):
+               	                if self.turn > 0: #right turn - left wheel moves, right wheel stops
+               	                    arduino.write('3500\n')
+               	                elif self.turn < 0: #left turn - right wheel moves, left wheel stops
+               	                    arduino.write('2500\n')
+               	        elif (self.acc != 0) and (self.turn != 0) and (self.pivot == True):
+               	            if (output != 1500):
+               	                if self.turn > 0: #right turn - left wheel moves, right wheel reverse
+               	                    r_out = 3500 + (output - 1500)
+               	                    arduino.write(str(r_out)+'\n')
+               	                elif self.turn < 0: #left turn - right wheel moves, left wheel reverse
+               	                    l_out = 2500 - (output - 1500)
+               	                    arduino.write(str(l_out)+'\n')
+               	        else:
+               	            arduino.write('1500\n')
 
 
 
