@@ -113,6 +113,12 @@ class App():
 			if (self.new_cmd - self.last_cmd) > 0.01:
 				self.last_cmd = self.new_cmd
 
+				if self.keyval['START_btn']: #manual mode
+					self.control = 'M'
+
+				if self.keyval['SELCT_btn']: #auto mode
+					self.control = 'A'
+
 				if self.keyval['CIRCL_btn']: #lock motors
 					sleep(0.012)
 					arduino.write('6000\n')
