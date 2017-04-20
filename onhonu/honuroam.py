@@ -77,7 +77,7 @@ class App():
 		                ps3dev = device.fn
 		                self.gamepad = evdev.InputDevice(ps3dev)
 		                print 'Controller connection made'
-
+		
 		def define_allkeys():
 		    self.allkeys = { #control name: [event type, event code]
 		      'CROSS_btn': [1, 302],	#cross button
@@ -202,8 +202,8 @@ class App():
                	                    arduino.write(str(l_out)+'\n')
                	                    self.r_acc = self.acc
                	                    self.l_acc = -self.acc
-               	        else:
-               	            arduino.write('1500\n')
+               	        #else:
+               	            #arduino.write('1500\n')
 
 
 
