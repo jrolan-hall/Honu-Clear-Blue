@@ -173,36 +173,41 @@ class App():
 				self.turn = 0
 
                	        output = int(1500-500*self.acc/100.0)
-               	        print 'drive: '+str(output)
                	        if output > 1999:
                	            output = 1999
                	        if (self.acc != 0) and (self.turn == 0): #forward and backwards at same speed
                	            arduino.write(str(output)+'\n')
+               	            print 'drive: '+str(output)
                	            self.l_acc = self.acc
                	            self.r_acc = self.acc
                	        elif (self.acc != 0) and (self.turn != 0) and (self.pivot == False):
                	            if (output != 1500):
                	                if self.turn > 0: #right turn - left wheel moves, right wheel stops
+               	                    print 'right turn'
                	                    arduino.write('3500\n')
                	                    self.r_acc = 0
                	                    self.l_acc = self.acc
                	                elif self.turn < 0: #left turn - right wheel moves, left wheel stops
+               	                    print 'left turn'
                	                    arduino.write('2500\n')
                	                    self.l_acc = 0
                	                    self.r_acc = self.acc
                	        elif (self.acc != 0) and (self.turn != 0) and (self.pivot == True):
                	            if (output != 1500):
                	                if self.turn > 0: #right turn - left wheel moves, right wheel reverse
+               	                    print 'right pivot'
                	                    r_out = 3500 + (output - 1500)
                	                    arduino.write(str(r_out)+'\n')
                	                    self.l_acc = self.acc
                	                    self.r_acc = -self.acc
                	                elif self.turn < 0: #left turn - right wheel moves, left wheel reverse
+               	                    print 'left pivot'
                	                    l_out = 2500 - (output - 1500)
                	                    arduino.write(str(l_out)+'\n')
                	                    self.r_acc = self.acc
                	                    self.l_acc = -self.acc
-               	        #else:
+               	        else:
+               	            print 'unknown state'
                	            #arduino.write('1500\n')
 
 
