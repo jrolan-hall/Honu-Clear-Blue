@@ -2510,7 +2510,7 @@ class App():
 
         	#movement
         self.steering = tk.Scale(self.fr8, from_=-1, to=1, orient=tk.HORIZONTAL, length=250, sliderrelief=tk.FLAT, highlightthickness=5, command=self.turning)
-        self.thrust = tk.Scale(self.fr8, from_=-100, to=100, orient=tk.VERTICAL, length=250, sliderrelief=tk.FLAT, highlightthickness=5, command=self.thrusting)
+        self.thrust = tk.Scale(self.fr8, from_=-80, to=80, orient=tk.VERTICAL, length=250, sliderrelief=tk.FLAT, highlightthickness=5, command=self.thrusting)
 
         self.steering_L = tk.Label(self.fr8, text='L', font=self.fn0, bg='#33B679', fg='#FFFFFF')
         self.steering_R = tk.Label(self.fr8, text='R', font=self.fn0, bg='#33B679', fg='#FFFFFF')
@@ -2580,7 +2580,10 @@ class App():
         if output > 1999:
             output = 1999
         if (thrust != 0) and (turn == 0): #forward and backwards at same speed
-            self.send_command(output)
+            l_out = output + 1050
+            r_out = 3500 - (output-1500)
+            self.send_command(l_out)
+            self.send_command(r_out)
         elif (thrust != 0) and (turn != 0) and (self.pivot_state == False):
             if (output != 1500):
                 if turn > 0: #right turn - left wheel moves, right wheel stops
