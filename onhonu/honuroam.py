@@ -134,6 +134,7 @@ class App():
 				#sleep(0.012)
 				arduino.write('5999\n')
 				self.door = 'O'
+				self.acc = 0
 				print 'door open'
 
 			if self.keyval['SQUAR_btn']==True: #door close - drive motors stop to do this
@@ -142,6 +143,7 @@ class App():
 				#sleep(0.012)
 				arduino.write('5000\n')
 				self.door = 'C'
+				self.acc = 0
 				print 'door close'
 
 			if self.keyval['UPARR_btn']==True: #comb on
