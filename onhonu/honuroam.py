@@ -158,10 +158,10 @@ class App():
 
 			self.pivot = self.keyval['CROSS_btn']
 
-			if (self.keyval['LEFT1_btn']==True) and (self.acc>-101):
+			if (self.keyval['RIHT1_btn']==True) and (self.acc>-101):
 				print 'rev'
 				self.acc += -0.33
-			if (self.keyval['RIHT1_btn']==True) and (self.acc<101):
+			if (self.keyval['LEFT1_btn']==True) and (self.acc<101):
 				self.acc += 0.33
 				print 'fwd'
 			if int(self.acc)%10 == 0:
