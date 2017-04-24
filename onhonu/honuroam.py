@@ -159,11 +159,12 @@ class App():
 			self.pivot = self.keyval['CROSS_btn']
 
 			if (self.keyval['LEFT1_trg']==True) and (self.acc>-101):
+				print 'fwd'
 				self.acc += -1
 			if (self.keyval['RIHT2_trg']==True) and (self.acc<101):
 				self.acc += 1
-			if self.acc%10 == 0:
-				print self.acc
+				print 'rev'
+			print self.acc
 
 			#self.acc = scale_trigger(self.keyval['LEFT2_trg'])-scale_trigger(self.keyval['RIHT2_trg'])
 
