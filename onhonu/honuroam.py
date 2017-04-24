@@ -183,7 +183,7 @@ class App():
                	        output = int(1500-500*self.acc/100.0)
                	        if output > 1999:
                	            output = 1999
-               	        if (self.acc != 0) and (self.turn == 0) and (self.acc%10 == 0): #forward and backwards at same speed
+               	        if (self.acc != 0) and (self.turn == 0) and (int(self.acc)%10 == 0): #forward and backwards at same speed
                	            arduino.write(str(output)+'\n')
                	            print 'drive: '+str(output)
                	            self.l_acc = self.acc
