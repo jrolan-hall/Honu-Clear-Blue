@@ -125,6 +125,7 @@ class App():
 				self.l_acc = 0
 				self.r_acc = 0
 				self.c_acc = 0
+				self.acc = 0
 				print 'Locked'
 
 			if self.keyval['TRIAN_btn']==True: #door open - drive motors stop to do this
@@ -157,7 +158,14 @@ class App():
 
 			self.pivot = self.keyval['CROSS_btn']
 
-			self.acc = scale_trigger(self.keyval['LEFT2_trg'])-scale_trigger(self.keyval['RIHT2_trg'])
+			if (self.keyval['LEFT1_trg']==True) and (self.acc>-101):
+				self.acc += -1
+			if (self.keyval['RIHT2_trg']==True) and (self.acc<101):
+				self.acc += 1
+			if self.acc%10 == 0:
+				print self.acc
+
+			#self.acc = scale_trigger(self.keyval['LEFT2_trg'])-scale_trigger(self.keyval['RIHT2_trg'])
 
 			self.turn = 0
 
@@ -171,7 +179,6 @@ class App():
 
 			if (self.keyval['RIGHT_btn']==True) and (self.keyval['LEFTA_btn']==True):
 				self.turn = 0
-
                	        output = int(1500-500*self.acc/100.0)
                	        if output > 1999:
                	            output = 1999
@@ -279,6 +286,7 @@ class App():
 			self.c_acc = 0 #comb acceleration
 			self.l_acc = 0
 			self.r_acc = 0
+			self.acc = 0
 			self.obl = False
 
 			#ready to connect light show
