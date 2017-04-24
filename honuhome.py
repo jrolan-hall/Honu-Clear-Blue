@@ -75,7 +75,7 @@ class App():
         self.init_authentication_screen(self.fr1, True)
         self.init_cover()
         self.raise_frame(self.fr0)
-        self.raise_frame(self.fr8) #a
+        self.raise_frame(self.fra) #a
         self.init_ipscreen()
         self.init_anchor_select_screen()
         self.init_anchor_confirmation_screen()
