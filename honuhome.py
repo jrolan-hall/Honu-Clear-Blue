@@ -44,7 +44,7 @@ class Splash(tk.Toplevel):
         self.attributes('-alpha',0.90)
         self.overrideredirect(1)
         self.splash = ImageTk.PhotoImage(file='./images/splashscreen.png')
-        tk.Label(self, image=self.splash, borderwidth=0, highlightthickness=0, bg='#646464').grid(row=0, column=0)
+        tk.Label(self, image=self.splash, borderwidth=0, highlightthickness=0, bg='#00a3fe').grid(row=0, column=0)
         self.rowconfigure(0, pad=124)
         self.columnconfigure(0, pad=704)
         self.update()
@@ -75,7 +75,7 @@ class App():
         self.init_authentication_screen(self.fr1, True)
         self.init_cover()
         self.raise_frame(self.fr0)
-        self.raise_frame(self.fra)
+        self.raise_frame(self.fr8) #a
         self.init_ipscreen()
         self.init_anchor_select_screen()
         self.init_anchor_confirmation_screen()
@@ -109,11 +109,11 @@ class App():
         #self.get_update()
         self.parse_update()
         try: 
-            self.latnow.configure(text=self.tupdate['LAT'])#, font=self.fn2, bg='#323232', fg='white')
-            self.lonnow.configure(text=self.tupdate['LON'])#, font=self.fn2, bg='#323232', fg='white')
+            self.latnow.configure(text=self.tupdate['LAT'])#, font=self.fn2, bg='#011239', fg='white')
+            self.lonnow.configure(text=self.tupdate['LON'])#, font=self.fn2, bg='#011239', fg='white')
         except:
-            self.latnow.configure(text='getting latitude...')#, font=self.fn2, bg='#323232', fg='white')
-            self.lonnow.configure(text='getting longitude...')#, font=self.fn2, bg='#323232', fg='white')
+            self.latnow.configure(text='getting latitude...')#, font=self.fn2, bg='#011239', fg='white')
+            self.lonnow.configure(text='getting longitude...')#, font=self.fn2, bg='#011239', fg='white')
         self.root.after(1500, self.scan_for_location)
 
 
@@ -182,7 +182,7 @@ class App():
         '''Initialize Honu Home gui style'''
         #window styles
         self.root.title('Honu Home')
-        self.root.configure(bg='#323232')
+        self.root.configure(bg='#011239')
         self.fn0 = tkFont.Font(family='segoe ui', size=11)
         self.fn1 = tkFont.Font(family='segoe ui', size=8)
         self.fn2 = tkFont.Font(family='segoe ui', size=16)
@@ -212,7 +212,7 @@ class App():
         self.frame_ls = [self.fra, self.fr0, self.fr1, self.fr2, self.fr3, self.fr4, self.fr5, self.fr6, self.fr7, self.fr8, self.fr9]
         for frame in self.frame_ls:
             frame.grid(row=0, column=0, sticky='news')
-            frame.configure(bg='#323232')
+            frame.configure(bg='#011239')
 
 
     def config_columns(self):
@@ -256,11 +256,11 @@ class App():
         '''Make dividers for dashboard'''   
         
         #declare dividers
-        self.div1 = tk.Frame(self.fr7, height=5, width=1280, bd=1, bg='#646464', relief='flat')
-        self.div2 = tk.Frame(self.fr7, height=5, width=1280, bd=1, bg='#646464', relief='flat')
-        self.div3 = tk.Frame(self.fr7, height=500, width=5, bd=1, bg='#646464', relief='flat')
-        self.div4 = tk.Frame(self.fr7, height=557, width=5, bd=1, bg='#646464', relief='flat')
-        self.div5 = tk.Frame(self.fr7, height=5, width=1280, bd=1, bg='#646464', relief='flat')
+        self.div1 = tk.Frame(self.fr7, height=5, width=1280, bd=1, bg='#00a3fe', relief='flat')
+        self.div2 = tk.Frame(self.fr7, height=5, width=1280, bd=1, bg='#00a3fe', relief='flat')
+        self.div3 = tk.Frame(self.fr7, height=500, width=5, bd=1, bg='#00a3fe', relief='flat')
+        self.div4 = tk.Frame(self.fr7, height=557, width=5, bd=1, bg='#00a3fe', relief='flat')
+        self.div5 = tk.Frame(self.fr7, height=5, width=1280, bd=1, bg='#00a3fe', relief='flat')
         
         #add to grid
         self.div1.grid(row=1, columnspan=16, sticky='N')
@@ -273,7 +273,7 @@ class App():
     def init_cover(self):
         '''Initialize cover frame'''
         self.coverbgi = ImageTk.PhotoImage(Image.open('./images/bga.png'))
-        self.coverbg = tk.Label(self.fra, image = self.coverbgi, borderwidth=0, highlightthickness=0, bg='#323232')
+        self.coverbg = tk.Label(self.fra, image = self.coverbgi, borderwidth=0, highlightthickness=0, bg='#011239')
         self.coverbg.place(x=0, y=0)#, relwidth=1, relheight=1)
         self.step = 0
         self.coverbg.bind('<Button-1>', lambda e: self.slideup())
@@ -297,11 +297,11 @@ class App():
 
         #background
         self.authbgi = ImageTk.PhotoImage(Image.open('./images/auth.png'))
-        self.authbg = tk.Label(self.fr0, image = self.authbgi, borderwidth=0, highlightthickness=0, bg='#323232')
+        self.authbg = tk.Label(self.fr0, image = self.authbgi, borderwidth=0, highlightthickness=0, bg='#011239')
         self.authbg.place(x=0, y=0)#, relwidth=1, relheight=1)
         
         #button bar
-        self.fr0bar = tk.Frame(self.fr0, height=60, width=230, bd=1, bg='#323232', relief='flat')
+        self.fr0bar = tk.Frame(self.fr0, height=60, width=230, bd=1, bg='#011239', relief='flat')
         self.fr0bar.grid(row=0, column=0, sticky='NW')
         
         #onscreen keyboard
@@ -312,9 +312,9 @@ class App():
         '''Initializes labels for authentication screen'''
 
         #declare labels and entry
-        self.instr0 = tk.Label(self.fr0, text='Please authenticate to continue.', height=10, width=30, font=self.fn2, bg='#424857', fg='white', anchor='nw', justify='left', wraplength=360)
-        self.pwd = tk.Entry(self.fr0, font=self.fn2, bg='white', fg='#323232', relief='flat', justify='center', width=32, show=u'\u2022')
-        self.pwdhold = tk.Label(self.fr0, text='Password', font=self.fn0, bg='white', fg='#646464', justify='left')
+        self.instr0 = tk.Label(self.fr0, text='Please authenticate to continue.', height=10, width=30, font=self.fn2, bg='#323B51', fg='white', anchor='nw', justify='left', wraplength=360)
+        self.pwd = tk.Entry(self.fr0, font=self.fn2, bg='white', fg='#011239', relief='flat', justify='center', width=32, show=u'\u2022')
+        self.pwdhold = tk.Label(self.fr0, text='Password', font=self.fn0, bg='white', fg='#00a3fe', justify='left')
 
         #set entry bindings
         self.pwd.bind('<Return>', lambda e: self.auth(destination))
@@ -448,7 +448,7 @@ class App():
         '''Initialize pin keypad'''
 
         #declare frame
-        self.pinfrm = tk.Frame(self.fr0, bd=1, width=50, height=50, bg='#323232', relief='flat')
+        self.pinfrm = tk.Frame(self.fr0, bd=1, width=50, height=50, bg='#011239', relief='flat')
 
         #declare buttons
         self.pin7 = tk.Button(self.pinfrm, relief='flat', bg='black', fg='white', width=9, font=self.fn2, command=lambda:self.add_text('7'))
@@ -601,15 +601,15 @@ class App():
         '''Initializes block 1'''
 
         #frame
-        self.fr3blk = tk.Frame(self.fr3, height=500, width=500, bd=1, bg='#323232', relief='flat')
+        self.fr3blk = tk.Frame(self.fr3, height=500, width=500, bd=1, bg='#011239', relief='flat')
         self.fr3blk.grid(row=1,column=2,columnspan=6)
         self.fr3blk.grid_propagate(False)
         self.fr3blk.rowconfigure(1,pad=25)
         self.fr3blk.rowconfigure(7,pad=25)
 
         #dividers
-        self.div3_1 = tk.Frame(self.fr3blk, height=5, width=500, bd=1, bg='#646464', relief='flat')
-        self.div3_2 = tk.Frame(self.fr3blk, height=5, width=500, bd=1, bg='#646464', relief='flat')
+        self.div3_1 = tk.Frame(self.fr3blk, height=5, width=500, bd=1, bg='#00a3fe', relief='flat')
+        self.div3_2 = tk.Frame(self.fr3blk, height=5, width=500, bd=1, bg='#00a3fe', relief='flat')
         self.div3_1.grid(row=1, column=0, columnspan=4)
         self.div3_2.grid(row=7, column=0, columnspan=4)
 
@@ -619,24 +619,24 @@ class App():
 
         #background
         self.dabgi = ImageTk.PhotoImage(Image.open('./images/allbg.png'))
-        self.dabg = tk.Label(self.fr3, image = self.dabgi, borderwidth=0, highlightthickness=0, bg='#323232')
+        self.dabg = tk.Label(self.fr3, image = self.dabgi, borderwidth=0, highlightthickness=0, bg='#011239')
         self.dabg.place(x=0, y=0)#, relwidth=1, relheight=1)
 
         #block 1
         self.init_analytics_set_frames_block_1()
 
         #block 2
-        self.fr3blk2 = tk.Frame(self.fr3, height=500, width=500, bd=1, bg='#323232', relief='flat')
+        self.fr3blk2 = tk.Frame(self.fr3, height=500, width=500, bd=1, bg='#011239', relief='flat')
         self.fr3blk2.grid(row=1,column=2,columnspan=6)
         self.fr3blk2.grid_propagate(False)
 
         #block 3
-        self.fr3blk3 = tk.Frame(self.fr3, height=500, width=500, bd=1, bg='#323232', relief='flat')
+        self.fr3blk3 = tk.Frame(self.fr3, height=500, width=500, bd=1, bg='#011239', relief='flat')
         self.fr3blk3.grid(row=1,column=2,columnspan=6)
         self.fr3blk3.grid_propagate(False)
 
         #button bar
-        self.fr3bar = tk.Frame(self.fr3, height=60, width=230, bd=1, bg='#323232', relief='flat')
+        self.fr3bar = tk.Frame(self.fr3, height=60, width=230, bd=1, bg='#011239', relief='flat')
         self.fr3bar.grid(row=0, column=0, sticky='NW')
 
         #shuffle group
@@ -646,7 +646,7 @@ class App():
 
     def init_analytics_set_labels(self):
         '''Initializes labels for analytics screen'''
-        self.instr5 = tk.Label(self.fr3, text='Welcome to Honu Tools and Insights.', font=self.fn2, bg='#464c59', fg='white',justify='left', height=10, width=30, anchor='nw', wraplength=360)       
+        self.instr5 = tk.Label(self.fr3, text='Welcome to Honu Tools and Insights.', font=self.fn2, bg='#323b51', fg='white',justify='left', height=10, width=30, anchor='nw', wraplength=360)       
         self.instr5.grid_propagate(False)
         self.instr5.grid(row=1, column=0, rowspan=2, sticky='SW')
 
@@ -709,16 +709,16 @@ class App():
         '''Initializes the cost calculator labels'''
 
         #header
-        self.cost_title = tk.Label(self.fr3blk, text='Honu Fleet Cost Calculator', font=self.fn2, bg='#323232', fg='white')
+        self.cost_title = tk.Label(self.fr3blk, text='Honu Fleet Cost Calculator', font=self.fn2, bg='#011239', fg='white')
         self.cost_title.grid(row=0, column=0, columnspan=8)
 
         #declare labels
-        self.fleet_label = tk.Label(self.fr3blk, text='Fleet Size', font=self.fn0, bg='#323232', fg='white', justify='left')
-        self.hours_label = tk.Label(self.fr3blk, text='Daily Work Hours', font=self.fn0, bg='#323232', fg='white', justify='left')
-        self.GBcost_label = tk.Label(self.fr3blk, text='Data Cost: $/GB', font=self.fn0, bg='#323232', fg='white', justify='left')
-        self.kWh_label = tk.Label(self.fr3blk, text='Energy cost: '+u"\u00A2"+'/kWh', font=self.fn0, bg='#323232', fg='white', justify='left')
-        self.solar_label = tk.Label(self.fr3blk, text='Daily solar charging hours', font=self.fn0, bg='#323232', fg='white', justify='left')
-        self.table_d = tk.Label(self.fr3blk, text='DATA', font=self.fn0, bg='#323232', fg='white')
+        self.fleet_label = tk.Label(self.fr3blk, text='Fleet Size', font=self.fn0, bg='#011239', fg='white', justify='left')
+        self.hours_label = tk.Label(self.fr3blk, text='Daily Work Hours', font=self.fn0, bg='#011239', fg='white', justify='left')
+        self.GBcost_label = tk.Label(self.fr3blk, text='Data Cost: $/GB', font=self.fn0, bg='#011239', fg='white', justify='left')
+        self.kWh_label = tk.Label(self.fr3blk, text='Energy cost: '+u"\u00A2"+'/kWh', font=self.fn0, bg='#011239', fg='white', justify='left')
+        self.solar_label = tk.Label(self.fr3blk, text='Daily solar charging hours', font=self.fn0, bg='#011239', fg='white', justify='left')
+        self.table_d = tk.Label(self.fr3blk, text='DATA', font=self.fn0, bg='#011239', fg='white')
 
         #grid labels
         self.fleet_label.grid(row=2,column=0)
@@ -747,10 +747,10 @@ class App():
         '''Initializes the hourly column of cost calculator'''
 
         #declare labels
-        self.hourly_fc = tk.Label(self.fr3blk, text='HOURLY', font=self.fn0, bg='#323232', fg='white', justify='left')
-        self.hourly_d = tk.Label(self.fr3blk, text='$0.00', font=self.fn0, bg='#323232', fg='white')
-        self.hourly_e = tk.Label(self.fr3blk, text='$0.00', font=self.fn0, bg='#323232', fg='white')
-        self.hourly_t = tk.Label(self.fr3blk, text='$0.00', font=self.fn0, bg='#323232', fg='white')
+        self.hourly_fc = tk.Label(self.fr3blk, text='HOURLY', font=self.fn0, bg='#011239', fg='white', justify='left')
+        self.hourly_d = tk.Label(self.fr3blk, text='$0.00', font=self.fn0, bg='#011239', fg='white')
+        self.hourly_e = tk.Label(self.fr3blk, text='$0.00', font=self.fn0, bg='#011239', fg='white')
+        self.hourly_t = tk.Label(self.fr3blk, text='$0.00', font=self.fn0, bg='#011239', fg='white')
 
         #grid labels
         self.hourly_fc.grid(row=9, column=0)
@@ -763,10 +763,10 @@ class App():
         '''Initializes the daily column of cost calculator'''
         
         #declare labels
-        self.daily_fc = tk.Label(self.fr3blk, text='DAILY', font=self.fn0, bg='#323232', fg='white', justify='left')
-        self.daily_d = tk.Label(self.fr3blk, text='$0.00', font=self.fn0, bg='#323232', fg='white')
-        self.daily_e = tk.Label(self.fr3blk, text='$0.00', font=self.fn0, bg='#323232', fg='white')
-        self.daily_t = tk.Label(self.fr3blk, text='$0.00', font=self.fn0, bg='#323232', fg='white')
+        self.daily_fc = tk.Label(self.fr3blk, text='DAILY', font=self.fn0, bg='#011239', fg='white', justify='left')
+        self.daily_d = tk.Label(self.fr3blk, text='$0.00', font=self.fn0, bg='#011239', fg='white')
+        self.daily_e = tk.Label(self.fr3blk, text='$0.00', font=self.fn0, bg='#011239', fg='white')
+        self.daily_t = tk.Label(self.fr3blk, text='$0.00', font=self.fn0, bg='#011239', fg='white')
 
         #grid labels
         self.daily_fc.grid(row=10, column=0)
@@ -779,10 +779,10 @@ class App():
         '''Initializes the weekly column of cost calculator'''
 
         #declare labels
-        self.weekly_fc = tk.Label(self.fr3blk, text='WEEKLY', font=self.fn0, bg='#323232', fg='white', justify='left')
-        self.weekly_d = tk.Label(self.fr3blk, text='$0.00', font=self.fn0, bg='#323232', fg='white')
-        self.weekly_e = tk.Label(self.fr3blk, text='$0.00', font=self.fn0, bg='#323232', fg='white')
-        self.weekly_t = tk.Label(self.fr3blk, text='$0.00', font=self.fn0, bg='#323232', fg='white')
+        self.weekly_fc = tk.Label(self.fr3blk, text='WEEKLY', font=self.fn0, bg='#011239', fg='white', justify='left')
+        self.weekly_d = tk.Label(self.fr3blk, text='$0.00', font=self.fn0, bg='#011239', fg='white')
+        self.weekly_e = tk.Label(self.fr3blk, text='$0.00', font=self.fn0, bg='#011239', fg='white')
+        self.weekly_t = tk.Label(self.fr3blk, text='$0.00', font=self.fn0, bg='#011239', fg='white')
 
         #grid labels
         self.weekly_fc.grid(row=11, column=0)
@@ -795,10 +795,10 @@ class App():
         '''Initializes the monthly column of cost calculator'''
         
         #declare labels
-        self.monthly_fc = tk.Label(self.fr3blk, text='MONTHLY', font=self.fn0, bg='#323232', fg='white', justify='left')
-        self.monthly_d = tk.Label(self.fr3blk, text='$0.00', font=self.fn0, bg='#323232', fg='white')
-        self.monthly_e = tk.Label(self.fr3blk, text='$0.00', font=self.fn0, bg='#323232', fg='white')
-        self.monthly_t = tk.Label(self.fr3blk, text='$0.00', font=self.fn0, bg='#323232', fg='white')
+        self.monthly_fc = tk.Label(self.fr3blk, text='MONTHLY', font=self.fn0, bg='#011239', fg='white', justify='left')
+        self.monthly_d = tk.Label(self.fr3blk, text='$0.00', font=self.fn0, bg='#011239', fg='white')
+        self.monthly_e = tk.Label(self.fr3blk, text='$0.00', font=self.fn0, bg='#011239', fg='white')
+        self.monthly_t = tk.Label(self.fr3blk, text='$0.00', font=self.fn0, bg='#011239', fg='white')
 
         #grid labels
         self.monthly_fc.grid(row=12, column=0)
@@ -811,10 +811,10 @@ class App():
         '''Initializes the yearly column of cost calculator'''    
         
         #declare labels
-        self.yearly_fc = tk.Label(self.fr3blk, text='YEARLY', font=self.fn0, bg='#323232', fg='white', justify='left')
-        self.yearly_d = tk.Label(self.fr3blk, text='$0.00', font=self.fn0, bg='#323232', fg='white')
-        self.yearly_e = tk.Label(self.fr3blk, text='$0.00', font=self.fn0, bg='#323232', fg='white')
-        self.yearly_t = tk.Label(self.fr3blk, text='$0.00', font=self.fn0, bg='#323232', fg='white')
+        self.yearly_fc = tk.Label(self.fr3blk, text='YEARLY', font=self.fn0, bg='#011239', fg='white', justify='left')
+        self.yearly_d = tk.Label(self.fr3blk, text='$0.00', font=self.fn0, bg='#011239', fg='white')
+        self.yearly_e = tk.Label(self.fr3blk, text='$0.00', font=self.fn0, bg='#011239', fg='white')
+        self.yearly_t = tk.Label(self.fr3blk, text='$0.00', font=self.fn0, bg='#011239', fg='white')
 
         #grid labels
         self.yearly_fc.grid(row=13, column=0)
@@ -827,9 +827,9 @@ class App():
         '''Initializes the cost calculator table'''
         
         #header
-        self.table_e = tk.Label(self.fr3blk, text='ENERGY', font=self.fn0, bg='#323232', fg='white')
+        self.table_e = tk.Label(self.fr3blk, text='ENERGY', font=self.fn0, bg='#011239', fg='white')
         self.table_e.grid(row=8, column=2, sticky='W')
-        self.table_t = tk.Label(self.fr3blk, text='TOTAL', font=self.fn0, bg='#323232', fg='white')
+        self.table_t = tk.Label(self.fr3blk, text='TOTAL', font=self.fn0, bg='#011239', fg='white')
         self.table_t.grid(row=8, column=3, sticky='W')
         self.init_cost_calc_set_table_hour()
         self.init_cost_calc_set_table_day()
@@ -900,7 +900,7 @@ class App():
 
         #background
         self.ipbgi = ImageTk.PhotoImage(Image.open('./images/ipbg.png'))
-        self.ipbg = tk.Label(self.fr1, image = self.ipbgi, borderwidth=0, highlightthickness=0, bg='#323232')
+        self.ipbg = tk.Label(self.fr1, image = self.ipbgi, borderwidth=0, highlightthickness=0, bg='#011239')
         self.ipbg.place(x=0, y=0)#, relwidth=1, relheight=1)
 
         #button bar
@@ -912,18 +912,18 @@ class App():
         '''Initializes labelss for ip screen'''
 
         #declare card labels
-        self.alias1 = tk.Label(self.fr1, text=self.devices[0][0], font=self.fn0, bg='#424857', fg='white')
-        self.alias2 = tk.Label(self.fr1, text=self.devices[1][0], font=self.fn0, bg='#424857', fg='white')
-        self.alias3 = tk.Label(self.fr1, text=self.devices[2][0], font=self.fn0, bg='#424857', fg='white')
-        self.ip1 = tk.Label(self.fr1, text=self.devices[0][1], font=self.fn0, bg='#424857', fg='white')
-        self.ip2 = tk.Label(self.fr1, text=self.devices[1][1], font=self.fn0, bg='#424857', fg='white')
-        self.ip3 = tk.Label(self.fr1, text=self.devices[2][1], font=self.fn0, bg='#424857', fg='white')
-        self.status1 = tk.Label(self.fr1, text=self.devices[0][2], font=self.fn0, bg='#424857', fg='white')
-        self.status2 = tk.Label(self.fr1, text=self.devices[1][2], font=self.fn0, bg='#424857', fg='white')
-        self.status3 = tk.Label(self.fr1, text=self.devices[2][2], font=self.fn0, bg='#424857', fg='white')
+        self.alias1 = tk.Label(self.fr1, text=self.devices[0][0], font=self.fn0, bg='#323B51', fg='white')
+        self.alias2 = tk.Label(self.fr1, text=self.devices[1][0], font=self.fn0, bg='#323B51', fg='white')
+        self.alias3 = tk.Label(self.fr1, text=self.devices[2][0], font=self.fn0, bg='#323B51', fg='white')
+        self.ip1 = tk.Label(self.fr1, text=self.devices[0][1], font=self.fn0, bg='#323B51', fg='white')
+        self.ip2 = tk.Label(self.fr1, text=self.devices[1][1], font=self.fn0, bg='#323B51', fg='white')
+        self.ip3 = tk.Label(self.fr1, text=self.devices[2][1], font=self.fn0, bg='#323B51', fg='white')
+        self.status1 = tk.Label(self.fr1, text=self.devices[0][2], font=self.fn0, bg='#323B51', fg='white')
+        self.status2 = tk.Label(self.fr1, text=self.devices[1][2], font=self.fn0, bg='#323B51', fg='white')
+        self.status3 = tk.Label(self.fr1, text=self.devices[2][2], font=self.fn0, bg='#323B51', fg='white')
 
         #instruction label
-        self.instr1 = tk.Label(self.fr1, text='Please select a Honu beach cleaning robot to begin.', font=self.fn2, bg='#424857', fg='white', justify='left',  height=10, width=30, anchor='nw', wraplength=360)
+        self.instr1 = tk.Label(self.fr1, text='Please select a Honu beach cleaning robot to begin.', font=self.fn2, bg='#323B51', fg='white', justify='left',  height=10, width=30, anchor='nw', wraplength=360)
         self.instr1.grid_propagate(False)
         self.instr1.grid(row=7,column=0, sticky='NW')
 
@@ -1076,13 +1076,13 @@ class App():
 
     def init_ipscreen_set_searchbar(self):
         '''Initializes searchbar for ipscreen'''
-        self.searchbar = tk.Entry(self.fr1, font=self.fn2, bg='white', fg='#323232', relief='flat', justify='center', width=61)
+        self.searchbar = tk.Entry(self.fr1, font=self.fn2, bg='white', fg='#011239', relief='flat', justify='center', width=61)
         self.searchbar.bind('<Return>', lambda e: self.search_honu())
         self.searchbar.grid(row=6,column=2,columnspan=3,ipady=11,pady=(25,0))
         self.onskfrm2 = tk.Frame(self.fr1, bd=1, width=810, height=200, bg='black', relief='flat')
         self.beta = ''
         self.onsk(self.onskfrm2, self.searchbar, self.beta, 2)
-        self.searchhold = tk.Label(self.fr1, text='Honu Search', font=self.fn0, bg='white', fg='#646464', justify='left')
+        self.searchhold = tk.Label(self.fr1, text='Honu Search', font=self.fn0, bg='white', fg='#00a3fe', justify='left')
         self.searchhold.grid(row=6,column=2,columnspan=3,ipady=11,pady=(25,0))
         self.searchbar.bind('<FocusIn>', lambda e: self.holdcheck2(self.searchbar, self.searchhold))
         self.searchbar.bind('<FocusOut>', lambda e: self.holdcheck2(self.searchbar, self.searchhold))
@@ -1280,15 +1280,15 @@ class App():
 
     def repaint_list(self):
         '''Repaints honu list'''
-        self.alias1.configure(text=self.devices[0][0])#, font=self.fn2, bg='#323232', fg='white')
-        self.alias2.configure(text=self.devices[1][0])#, font=self.fn2, bg='#323232', fg='white')
-        self.alias3.configure(text=self.devices[2][0])#, font=self.fn2, bg='#323232', fg='white')
-        self.ip1.configure(text=self.devices[0][1])#, font=self.fn2, bg='#323232', fg='white')
-        self.ip2.configure(text=self.devices[1][1])#, font=self.fn2, bg='#323232', fg='white')
-        self.ip3.configure(text=self.devices[2][1])#, font=self.fn2, bg='#323232', fg='white')
-        self.status1.configure(text=self.devices[0][2])#, font=self.fn2, bg='#323232', fg='white')
-        self.status2.configure(text=self.devices[1][2])#, font=self.fn2, bg='#323232', fg='white')
-        self.status3.configure(text=self.devices[2][2])#, font=self.fn2, bg='#323232', fg='white')
+        self.alias1.configure(text=self.devices[0][0])#, font=self.fn2, bg='#011239', fg='white')
+        self.alias2.configure(text=self.devices[1][0])#, font=self.fn2, bg='#011239', fg='white')
+        self.alias3.configure(text=self.devices[2][0])#, font=self.fn2, bg='#011239', fg='white')
+        self.ip1.configure(text=self.devices[0][1])#, font=self.fn2, bg='#011239', fg='white')
+        self.ip2.configure(text=self.devices[1][1])#, font=self.fn2, bg='#011239', fg='white')
+        self.ip3.configure(text=self.devices[2][1])#, font=self.fn2, bg='#011239', fg='white')
+        self.status1.configure(text=self.devices[0][2])#, font=self.fn2, bg='#011239', fg='white')
+        self.status2.configure(text=self.devices[1][2])#, font=self.fn2, bg='#011239', fg='white')
+        self.status3.configure(text=self.devices[2][2])#, font=self.fn2, bg='#011239', fg='white')
         self.icard1 = ImageTk.PhotoImage(Image.open(self.avatars[0]))
         self.icard2 = ImageTk.PhotoImage(Image.open(self.avatars[1]))
         self.icard3 = ImageTk.PhotoImage(Image.open(self.avatars[2]))
@@ -1333,11 +1333,11 @@ class App():
         self.asbg.place(x=0, y=0)#, relwidth=1, relheight=1)
 
         #button bar
-        self.fr2bar = tk.Frame(self.fr2, height=60, width=340, bd=1, bg='#323232', relief='flat') #width = 325 for 4 buttons
+        self.fr2bar = tk.Frame(self.fr2, height=60, width=340, bd=1, bg='#011239', relief='flat') #width = 325 for 4 buttons
         self.fr2bar.grid(row=0,column=0,rowspan=4, sticky='NW')
 
         #onscreen keyboard
-        self.oskfrm = tk.Frame(self.fr2, bd=1, width=50, height=50, bg='#323232', relief='flat')
+        self.oskfrm = tk.Frame(self.fr2, bd=1, width=50, height=50, bg='#011239', relief='flat')
         self._osk(self.oskfrm)
 
 
@@ -1345,16 +1345,16 @@ class App():
         '''Does prescan for initialize anchor select screen set labels function'''
 
         #headers
-        self.lathead = tk.Label(self.fr2, text='LATITUDE', font=self.fn0, bg='#484d5a', fg='white')
-        self.lonhead = tk.Label(self.fr2, text='LONGITUDE', font=self.fn0, bg='#484d5a', fg='white')
+        self.lathead = tk.Label(self.fr2, text='LATITUDE', font=self.fn0, bg='#323b51', fg='white')
+        self.lonhead = tk.Label(self.fr2, text='LONGITUDE', font=self.fn0, bg='#323b51', fg='white')
 
         #initial location
         try: #will remove for production
-            self.latnow = tk.Label(self.fr2, text=self.tupdate['LAT'], font=self.fn0, bg='#484d5a', fg='white')
-            self.lonnow = tk.Label(self.fr2, text=self.tupdate['LON'], font=self.fn0, bg='#484d5a', fg='white')
+            self.latnow = tk.Label(self.fr2, text=self.tupdate['LAT'], font=self.fn0, bg='#323b51', fg='white')
+            self.lonnow = tk.Label(self.fr2, text=self.tupdate['LON'], font=self.fn0, bg='#323b51', fg='white')
         except:
-            self.latnow = tk.Label(self.fr2, text='getting latitude...', font=self.fn0, bg='#484d5a', fg='white')
-            self.lonnow = tk.Label(self.fr2, text='getting longitude...', font=self.fn0, bg='#484d5a', fg='white')   
+            self.latnow = tk.Label(self.fr2, text='getting latitude...', font=self.fn0, bg='#323b51', fg='white')
+            self.lonnow = tk.Label(self.fr2, text='getting longitude...', font=self.fn0, bg='#323b51', fg='white')   
 
         #add to grid
         self.lathead.grid(row=0, column=2)
@@ -1368,19 +1368,19 @@ class App():
         self.init_anchor_select_screen_set_labels_prescan()
 
         #instructions
-        self.instr2 = tk.Label(self.fr2, text="Please tell Honu the boundaries of the work area. The first coordinate is Honu's current position. At least one additional coordinate to plan a route. If you need to enter more than four points, click or tap the + icon.", font=self.fn2, bg='#484d5a', fg='white', justify='left', height=10, width=30, anchor='nw', wraplength=360)               
+        self.instr2 = tk.Label(self.fr2, text="Please tell Honu the boundaries of the work area. The first coordinate is Honu's current position. At least one additional coordinate to plan a route. If you need to enter more than four points, click or tap the + icon.", font=self.fn2, bg='#323b51', fg='white', justify='left', height=10, width=30, anchor='nw', wraplength=360)               
         self.instr2.grid_propagate(False)
         self.instr2.grid(row=6,column=0, rowspan=5, sticky='W') 
 
         #declare coordinate entries
-        self.lat_p1 = tk.Entry(self.fr2, font=self.fn0, bg='#484d5a', fg='white', relief='flat', justify='center')
-        self.lon_p1 = tk.Entry(self.fr2, font=self.fn0, bg='#484d5a', fg='white', relief='flat', justify='center')
-        self.lat_p2 = tk.Entry(self.fr2, font=self.fn0, bg='#484d5a', fg='white', relief='flat', justify='center')
-        self.lon_p2 = tk.Entry(self.fr2, font=self.fn0, bg='#484d5a', fg='white', relief='flat', justify='center')
-        self.lat_p3 = tk.Entry(self.fr2, font=self.fn0, bg='#484d5a', fg='white', relief='flat', justify='center')
-        self.lon_p3 = tk.Entry(self.fr2, font=self.fn0, bg='#484d5a', fg='white', relief='flat', justify='center')
-        self.lat_p4 = tk.Entry(self.fr2, font=self.fn0, bg='#484d5a', fg='white', relief='flat', justify='center')
-        self.lon_p4 = tk.Entry(self.fr2, font=self.fn0, bg='#484d5a', fg='white', relief='flat', justify='center')
+        self.lat_p1 = tk.Entry(self.fr2, font=self.fn0, bg='#323b51', fg='white', relief='flat', justify='center')
+        self.lon_p1 = tk.Entry(self.fr2, font=self.fn0, bg='#323b51', fg='white', relief='flat', justify='center')
+        self.lat_p2 = tk.Entry(self.fr2, font=self.fn0, bg='#323b51', fg='white', relief='flat', justify='center')
+        self.lon_p2 = tk.Entry(self.fr2, font=self.fn0, bg='#323b51', fg='white', relief='flat', justify='center')
+        self.lat_p3 = tk.Entry(self.fr2, font=self.fn0, bg='#323b51', fg='white', relief='flat', justify='center')
+        self.lon_p3 = tk.Entry(self.fr2, font=self.fn0, bg='#323b51', fg='white', relief='flat', justify='center')
+        self.lat_p4 = tk.Entry(self.fr2, font=self.fn0, bg='#323b51', fg='white', relief='flat', justify='center')
+        self.lon_p4 = tk.Entry(self.fr2, font=self.fn0, bg='#323b51', fg='white', relief='flat', justify='center')
 
         #add to grid
         self.lat_p1.grid(row=2, column=2)
@@ -1579,7 +1579,7 @@ class App():
         if self.valid_check()==True:
             self.display_area()
         else:
-            self.instr2.configure(text='Let us try that again. \nPlease tell Honu the boundaries of the work area by entering points in the spaces provided or click/tap the return arrow to select another Honu beach cleaning robot')#, font=self.fn2, bg='#323232', fg='white', justify='left', wraplength=360)
+            self.instr2.configure(text='Let us try that again. \nPlease tell Honu the boundaries of the work area by entering points in the spaces provided or click/tap the return arrow to select another Honu beach cleaning robot')#, font=self.fn2, bg='#011239', fg='white', justify='left', wraplength=360)
             self.play('./sounds/connectno.wav', sfn)
 
 
@@ -1592,7 +1592,7 @@ class App():
                 anchor[0].delete(0,'end')
                 anchor[1].delete(0,'end')
         self.anchorcount = str(round(((len(self.anchorslat)+len(self.anchorslon))/2.0),1))
-        self.instr2.configure(text='I have recorded ' + self.anchorcount+' points. You may enter more points in the spaces provided or click/tap the next arrow to continue')#, font=self.fn2, bg='#323232', fg='white', justify='left', wraplength=360)
+        self.instr2.configure(text='I have recorded ' + self.anchorcount+' points. You may enter more points in the spaces provided or click/tap the next arrow to continue')#, font=self.fn2, bg='#011239', fg='white', justify='left', wraplength=360)
         self.play('./sounds/connect.wav', sfn)
 
 
@@ -1686,7 +1686,7 @@ class App():
 
         #background
         self.acbgi = ImageTk.PhotoImage(Image.open('./images/allbg.png'))
-        self.acbg = tk.Label(self.fr4, image = self.acbgi, borderwidth=0, highlightthickness=0, bg='#323232')
+        self.acbg = tk.Label(self.fr4, image = self.acbgi, borderwidth=0, highlightthickness=0, bg='#011239')
         self.acbg.place(x=0, y=0)#, relwidth=1, relheight=1)
 
         #block
@@ -1722,7 +1722,7 @@ class App():
         self.init_anchor_confirmation_screen_buttons()
 
         #instructions
-        self.instr3 = tk.Label(self.fr4, text='This is the area', font=self.fn2, bg='#464c59', fg='white', justify='left', height=5, width=30, anchor='nw', wraplength=360)        
+        self.instr3 = tk.Label(self.fr4, text='This is the area', font=self.fn2, bg='#323b51', fg='white', justify='left', height=5, width=30, anchor='nw', wraplength=360)        
         self.instr3.grid_propagate(False)
         self.instr3.grid(row=1, column=0, rowspan=2, sticky='SW')
 
@@ -1772,7 +1772,7 @@ class App():
         for anchor in self.anchor_ls:
             anchor[0].delete(0,'end')
             anchor[1].delete(0,'end')
-        self.instr2.configure(text="Please tell honu the boundaries of the work area. The first coordinate is honu's current position. At least one additional coordinate to plan a route. If you need to enter more than four points, click or tap the + icon")#, font=self.fn2, bg='#323232', fg='white', justify='left', wraplength=360)
+        self.instr2.configure(text="Please tell honu the boundaries of the work area. The first coordinate is honu's current position. At least one additional coordinate to plan a route. If you need to enter more than four points, click or tap the + icon")#, font=self.fn2, bg='#011239', fg='white', justify='left', wraplength=360)
         self.raise_frame(self.fr2)
         self.acfd.config(command=lambda:self.display_route())
         try:
@@ -1830,8 +1830,8 @@ class App():
         else:
             string = 'This is the weather forecast for Honu at '+self.homelat.cget('text')+', '+self.homelon.cget('text')+'. (near '+location+')'
         self.instr6.config(text=string)
-        tk.Label(self.fr6blk, text='Powered by Dark Sky', font=self.fn1, bg='#323232', fg='#646464').grid(row=6, column=0, columnspan=5)
-        self.unitsysbtn = tk.Button(self.fr6blk, text='USC system', relief='flat', bg='#323232', fg='#646464', command=lambda:self.unit_sys_swap())
+        tk.Label(self.fr6blk, text='Powered by Dark Sky', font=self.fn1, bg='#011239', fg='#00a3fe').grid(row=6, column=0, columnspan=5)
+        self.unitsysbtn = tk.Button(self.fr6blk, text='USC system', relief='flat', bg='#011239', fg='#00a3fe', command=lambda:self.unit_sys_swap())
         self.unitsysbtn.grid(row=6, column=5)
         send = {}
         send['MSG'] = 'WEATHER'
@@ -1924,13 +1924,13 @@ class App():
     def init_weather_forecast(self):
         '''Initialize weather forecast screen'''
         self.wfbgi = ImageTk.PhotoImage(Image.open('./images/allbg.png'))
-        self.wfbg = tk.Label(self.fr6, image = self.wfbgi, borderwidth=0, highlightthickness=0, bg='#323232')
+        self.wfbg = tk.Label(self.fr6, image = self.wfbgi, borderwidth=0, highlightthickness=0, bg='#011239')
         self.wfbg.place(x=0, y=0)#, relwidth=1, relheight=1)
-        self.fr6bar = tk.Frame(self.fr6, height=60, width=230, bd=1, bg='#323232', relief='flat')
+        self.fr6bar = tk.Frame(self.fr6, height=60, width=230, bd=1, bg='#011239', relief='flat')
         self.fr6bar.grid(row=0, column=0, sticky='NW')
-        self.instr6 = tk.Label(self.fr6, text='This is the weather forecast for Honu.', font=self.fn2, bg='#464c59', fg='white', justify='left', height=8, width=30, anchor='nw', wraplength=360)        
+        self.instr6 = tk.Label(self.fr6, text='This is the weather forecast for Honu.', font=self.fn2, bg='#323b51', fg='white', justify='left', height=8, width=30, anchor='nw', wraplength=360)        
         self.instr6.grid_propagate(False)
-        self.fr6blk = tk.Frame(self.fr6, height=423, width=610, bd=1, bg='#323232', relief='flat')
+        self.fr6blk = tk.Frame(self.fr6, height=423, width=610, bd=1, bg='#011239', relief='flat')
         self.fr6blk.grid(row=1,column=2,columnspan=6, sticky='S')
         #self.fr6blk.grid_propagate(False)
         self.wfbk = tk.Button(self.fr6bar, relief='flat', bg='black', command=lambda:self.raise_frame(self.fr2))
@@ -1954,18 +1954,18 @@ class App():
         self.windcast = [self.S1, self.S2, self.S3, self.S4, self.S5]
         self.chancecast = [self.P1, self.P2, self.P3, self.P4, self.P5]
         self.raincast = [self.N1, self.N2, self.N3, self.N4, self.N5]
-        tk.Label(self.fr6blk, text='Temperature', font=self.fn1, bg='#323232', fg='white').grid(row=1, column=0)
-        tk.Label(self.fr6blk, text='Wind speed', font=self.fn1, bg='#323232', fg='white').grid(row=2, column=0)
-        tk.Label(self.fr6blk, text='Chance of rain', font=self.fn1, bg='#323232', fg='white').grid(row=3, column=0)
-        tk.Label(self.fr6blk, text='Precipitation', font=self.fn1, bg='#323232', fg='white').grid(row=4, column=0)
+        tk.Label(self.fr6blk, text='Temperature', font=self.fn1, bg='#011239', fg='white').grid(row=1, column=0)
+        tk.Label(self.fr6blk, text='Wind speed', font=self.fn1, bg='#011239', fg='white').grid(row=2, column=0)
+        tk.Label(self.fr6blk, text='Chance of rain', font=self.fn1, bg='#011239', fg='white').grid(row=3, column=0)
+        tk.Label(self.fr6blk, text='Precipitation', font=self.fn1, bg='#011239', fg='white').grid(row=4, column=0)
         for j in range(0,5):
             self.fr6blk.rowconfigure(j,pad=20)
             self.fr6blk.columnconfigure(j+1, pad=60)
-            self.hourcast[j] = tk.Label(self.fr6blk, text='H', font=self.fn0, bg='#323232', fg='white')
-            self.tempcast[j] = tk.Label(self.fr6blk, text='T', font=self.fn0, bg='#323232', fg='white')
-            self.windcast[j] = tk.Label(self.fr6blk, text='W', font=self.fn0, bg='#323232', fg='white')
-            self.chancecast[j] = tk.Label(self.fr6blk, text='P', font=self.fn0, bg='#323232', fg='white')
-            self.raincast[j] = tk.Label(self.fr6blk, text='N', font=self.fn0, bg='#323232', fg='white')
+            self.hourcast[j] = tk.Label(self.fr6blk, text='H', font=self.fn0, bg='#011239', fg='white')
+            self.tempcast[j] = tk.Label(self.fr6blk, text='T', font=self.fn0, bg='#011239', fg='white')
+            self.windcast[j] = tk.Label(self.fr6blk, text='W', font=self.fn0, bg='#011239', fg='white')
+            self.chancecast[j] = tk.Label(self.fr6blk, text='P', font=self.fn0, bg='#011239', fg='white')
+            self.raincast[j] = tk.Label(self.fr6blk, text='N', font=self.fn0, bg='#011239', fg='white')
             self.hourcast[j].grid(row=0, column=j+1)
             self.tempcast[j].grid(row=1, column=j+1)
             self.windcast[j].grid(row=2, column=j+1)
@@ -1988,11 +1988,11 @@ class App():
     def init_header(self):
         #logo
         self.logoi = ImageTk.PhotoImage(Image.open('./images/logo.gif'))
-        self.logo = tk.Label(self.fr7, image=self.logoi, borderwidth=0, highlightthickness=0, bg='#323232')
+        self.logo = tk.Label(self.fr7, image=self.logoi, borderwidth=0, highlightthickness=0, bg='#011239')
         self.logo.grid(row=0, column=0, columnspan=3, sticky='W')
         #datetime - define labels
-        self.date = tk.Label(self.fr7, text='Date: ', font=self.fn0, bg='#323232', fg='white') #from PC or GPS
-        self.time = tk.Label(self.fr7, text='Time: ', font=self.fn0, bg='#323232', fg='white') #from PC or GPS
+        self.date = tk.Label(self.fr7, text='Date: ', font=self.fn0, bg='#011239', fg='white') #from PC or GPS
+        self.time = tk.Label(self.fr7, text='Time: ', font=self.fn0, bg='#011239', fg='white') #from PC or GPS
         #datetime - add to grid
         self.date.grid(row=0,column=12, columnspan=2)
         self.time.grid(row=0,column=14, columnspan=2)
@@ -2060,10 +2060,10 @@ class App():
         self.popq7 = tk.Tk()
         self.popq7.iconbitmap('./images/favicon.ico')
         self.popq7.title('Set home position')
-        self.popq7.configure(bg='#323232')
-        self.homeinstr = tk.Label(self.popq7, text='Please enter the GPS coordinates of the homing position.', font=self.fn1, bg='#323232', fg='white')#, justify='left',  height=10, width=30)
-        self.hlatlabel = tk.Label(self.popq7, text='LATITUDE', font=self.fn0, bg='#323232', fg='white')#,  height=10, width=30)
-        self.hlonlabel =tk.Label(self.popq7, text='LONGITUDE', font=self.fn0, bg='#323232', fg='white')#,  height=10, width=30)
+        self.popq7.configure(bg='#011239')
+        self.homeinstr = tk.Label(self.popq7, text='Please enter the GPS coordinates of the homing position.', font=self.fn1, bg='#011239', fg='white')#, justify='left',  height=10, width=30)
+        self.hlatlabel = tk.Label(self.popq7, text='LATITUDE', font=self.fn0, bg='#011239', fg='white')#,  height=10, width=30)
+        self.hlonlabel =tk.Label(self.popq7, text='LONGITUDE', font=self.fn0, bg='#011239', fg='white')#,  height=10, width=30)
         self.homelatl = tk.Entry(self.popq7, font=self.fn0, bg='white', fg='black')#, justify='left',  height=10, width=30)
         self.homelonl = tk.Entry(self.popq7, font=self.fn0, bg='white', fg='black')#, justify='left',  height=10, width=30)
         self.homefd = tk.Button(self.popq7, text='OK', font=self.fn0, relief='flat', bg='black', fg='white', command=lambda:self.set_home())
@@ -2073,7 +2073,7 @@ class App():
         self.homelat.grid(row=2, column=0)
         self.homelon.grid(row=4, column=0)
         self.homefd.grid(row=6, column=1)
-        self.oskfrm2 = tk.Frame(self.popq7, bd=1, width=50, height=50, bg='#323232', relief='flat')
+        self.oskfrm2 = tk.Frame(self.popq7, bd=1, width=50, height=50, bg='#011239', relief='flat')
         self._osk(self.oskfrm2)
         self.oskfrm2.grid(row=1, column=2, rowspan=7)
         self.popq7.update()
@@ -2141,9 +2141,9 @@ class App():
 
     def init_dash_MBOX(self):
         #message box
-        self.mboxfrm = tk.Frame(self.fr7, height=120, width=810, bd=1, bg='#646464', relief='flat')
-        self.mboxlabel = tk.Label(self.mboxfrm, text='Messages', font=self.fn1, bg='#646464', fg='#323232')
-        self.mbox = tk.Label(self.mboxfrm,text='Busy bantering with bored beachgoers', font=self.fn0, bg='#646464', fg='white', wraplength=420)
+        self.mboxfrm = tk.Frame(self.fr7, height=120, width=810, bd=1, bg='#00a3fe', relief='flat')
+        self.mboxlabel = tk.Label(self.mboxfrm, text='Messages', font=self.fn1, bg='#00a3fe', fg='#011239')
+        self.mbox = tk.Label(self.mboxfrm,text='Busy bantering with bored beachgoers', font=self.fn0, bg='#00a3fe', fg='#011239', wraplength=420)
         self.mboxfrm.grid_propagate(False)
         self.mboxfrm.grid(row=7,column=0,columnspan=9,rowspan=3, sticky='E')
         self.mboxlabel.grid(row=0, column=0, columnspan=9, sticky='W')
@@ -2163,12 +2163,12 @@ class App():
         self.temp_i = ImageTk.PhotoImage(Image.open('./images/TMP-X.gif'))
         self.humid_i = ImageTk.PhotoImage(Image.open('./images/HMD-X.gif'))
         self.vol_i = ImageTk.PhotoImage(Image.open('./images/VOL-X.gif'))
-        self.speedi = tk.Label(self.fr7, image=self.speed_i, bg='#323232', borderwidth=0, highlightthickness=0) #from GPS
-        self.batteryi = tk.Label(self.fr7, image=self.battery_i, bg='#323232', borderwidth=0, highlightthickness=0) #from volie
-        self.combi = tk.Label(self.fr7, image=self.comb_i, bg='#323232', borderwidth=0, highlightthickness=0) #from current
-        self.tempi = tk.Label(self.fr7, image=self.temp_i, bg='#323232', borderwidth=0, highlightthickness=0) #from humidity sensor
-        self.humidi = tk.Label(self.fr7, image=self.humid_i, bg='#323232', borderwidth=0, highlightthickness=0) #from humidity sensor
-        self.voli = tk.Label(self.fr7, image=self.vol_i, bg='#323232', borderwidth=0, highlightthickness=0) #from internal IR
+        self.speedi = tk.Label(self.fr7, image=self.speed_i, bg='#011239', borderwidth=0, highlightthickness=0) #from GPS
+        self.batteryi = tk.Label(self.fr7, image=self.battery_i, bg='#011239', borderwidth=0, highlightthickness=0) #from volie
+        self.combi = tk.Label(self.fr7, image=self.comb_i, bg='#011239', borderwidth=0, highlightthickness=0) #from current
+        self.tempi = tk.Label(self.fr7, image=self.temp_i, bg='#011239', borderwidth=0, highlightthickness=0) #from humidity sensor
+        self.humidi = tk.Label(self.fr7, image=self.humid_i, bg='#011239', borderwidth=0, highlightthickness=0) #from humidity sensor
+        self.voli = tk.Label(self.fr7, image=self.vol_i, bg='#011239', borderwidth=0, highlightthickness=0) #from internal IR
         #data is - add to grid
         self.speedi.grid(row=2,column=4)
         self.batteryi.grid(row=3,column=4)
@@ -2180,12 +2180,12 @@ class App():
 
     def init_sensor_data_vars(self):
         #data (values to be updated) - define labels
-        self.speed = tk.Label(self.fr7, text='SPD ', font=self.fn0, bg='#323232', fg='white') #from GPS
-        self.battery = tk.Label(self.fr7, text='BAT ', font=self.fn0, bg='#323232', fg='white') #from volie
-        self.comb = tk.Label(self.fr7, text='CMB ', font=self.fn0, bg='#323232', fg='white') #from current
-        self.temp = tk.Label(self.fr7, text='TMP ', font=self.fn0, bg='#323232', fg='white') #from humidity sensor
-        self.humid = tk.Label(self.fr7, text='HUM ', font=self.fn0, bg='#323232', fg='white') #from humidity sensor
-        self.vol = tk.Label(self.fr7, text='VOL ', font=self.fn0, bg='#323232', fg='white') #from internal IR
+        self.speed = tk.Label(self.fr7, text='SPD ', font=self.fn0, bg='#011239', fg='white') #from GPS
+        self.battery = tk.Label(self.fr7, text='BAT ', font=self.fn0, bg='#011239', fg='white') #from volie
+        self.comb = tk.Label(self.fr7, text='CMB ', font=self.fn0, bg='#011239', fg='white') #from current
+        self.temp = tk.Label(self.fr7, text='TMP ', font=self.fn0, bg='#011239', fg='white') #from humidity sensor
+        self.humid = tk.Label(self.fr7, text='HUM ', font=self.fn0, bg='#011239', fg='white') #from humidity sensor
+        self.vol = tk.Label(self.fr7, text='VOL ', font=self.fn0, bg='#011239', fg='white') #from internal IR
         #data - add to grid
         self.speed.grid(row=2,column=5)
         self.battery.grid(row=3,column=5)
@@ -2201,20 +2201,20 @@ class App():
         self.left_i = ImageTk.PhotoImage(Image.open('./images/LIR-X.gif'))
         self.right_i = ImageTk.PhotoImage(Image.open('./images/RIR-X.gif'))
         self.rear_i = ImageTk.PhotoImage(Image.open('./images/BIR-X.gif'))
-        self.fronti = tk.Label(self.fr7, image=self.front_i, bg='#323232', borderwidth=0, highlightthickness=0) #from front IR
-        self.lefti = tk.Label(self.fr7, image=self.left_i, bg='#323232', borderwidth=0, highlightthickness=0) #from left IR
-        self.righti = tk.Label(self.fr7, image=self.right_i, bg='#323232', borderwidth=0, highlightthickness=0) #from right IR
-        self.reari = tk.Label(self.fr7, image=self.rear_i, bg='#323232', borderwidth=0, highlightthickness=0) #from rear IR
+        self.fronti = tk.Label(self.fr7, image=self.front_i, bg='#011239', borderwidth=0, highlightthickness=0) #from front IR
+        self.lefti = tk.Label(self.fr7, image=self.left_i, bg='#011239', borderwidth=0, highlightthickness=0) #from left IR
+        self.righti = tk.Label(self.fr7, image=self.right_i, bg='#011239', borderwidth=0, highlightthickness=0) #from right IR
+        self.reari = tk.Label(self.fr7, image=self.rear_i, bg='#011239', borderwidth=0, highlightthickness=0) #from rear IR
         #obstacle is - add to grid
         self.fronti.grid(row=3,column=7)
         self.lefti.grid(row=4,column=7)
         self.righti.grid(row=5,column=7)
         self.reari.grid(row=6,column=7)
         #obstacles (values to be updated) - define labels
-        self.front = tk.Label(self.fr7, text='F ', font=self.fn0, bg='#323232', fg='white') #from front IR
-        self.left = tk.Label(self.fr7, text='L ', font=self.fn0, bg='#323232', fg='white') #from left IR
-        self.right = tk.Label(self.fr7, text='R ', font=self.fn0, bg='#323232', fg='white') #from right IR
-        self.rear = tk.Label(self.fr7, text='B ', font=self.fn0, bg='#323232', fg='white') #from rear IR
+        self.front = tk.Label(self.fr7, text='F ', font=self.fn0, bg='#011239', fg='white') #from front IR
+        self.left = tk.Label(self.fr7, text='L ', font=self.fn0, bg='#011239', fg='white') #from left IR
+        self.right = tk.Label(self.fr7, text='R ', font=self.fn0, bg='#011239', fg='white') #from right IR
+        self.rear = tk.Label(self.fr7, text='B ', font=self.fn0, bg='#011239', fg='white') #from rear IR
         #obstacles - add to grid
         self.front.grid(row=3,column=8)
         self.left.grid(row=4,column=8)
@@ -2224,12 +2224,12 @@ class App():
 
     def init_spatial_data(self):
         #spatial is
-        self.lati = tk.Label(self.fr7, text='LAT: ', font=self.fn0, bg='#323232', fg='white') #from GPS
-        self.loni = tk.Label(self.fr7, text='LON: ', font=self.fn0, bg='#323232', fg='white') #from GPS
-        self.alti = tk.Label(self.fr7, text='ALT: ', font=self.fn0, bg='#323232', fg='white') #from GPS)
-        self.vnoi = tk.Label(self.fr7, text='VISITED: ', font=self.fn0, bg='#323232', fg='white') #from algo
-        self.rnoi = tk.Label(self.fr7, text='REMAINING: ', font=self.fn0, bg='#323232', fg='white') #from algo
-        self.cpsi = tk.Label(self.fr7, text='BEARING: ', font=self.fn0, bg='#323232', fg='white') #from GPS
+        self.lati = tk.Label(self.fr7, text='LAT: ', font=self.fn0, bg='#011239', fg='white') #from GPS
+        self.loni = tk.Label(self.fr7, text='LON: ', font=self.fn0, bg='#011239', fg='white') #from GPS
+        self.alti = tk.Label(self.fr7, text='ALT: ', font=self.fn0, bg='#011239', fg='white') #from GPS)
+        self.vnoi = tk.Label(self.fr7, text='VISITED: ', font=self.fn0, bg='#011239', fg='white') #from algo
+        self.rnoi = tk.Label(self.fr7, text='REMAINING: ', font=self.fn0, bg='#011239', fg='white') #from algo
+        self.cpsi = tk.Label(self.fr7, text='BEARING: ', font=self.fn0, bg='#011239', fg='white') #from GPS
         #spatial is - add to grid
         self.lati.grid(row=7,column=11, sticky='W')
         self.loni.grid(row=8,column=11, sticky='W')
@@ -2238,13 +2238,13 @@ class App():
         self.rnoi.grid(row=8,column=14, sticky='W')
         self.cpsi.grid(row=9,column=14, sticky='W')
         #spatial (values to be updated) - define labels
-        self.lat = tk.Label(self.fr7, text='LAT ', font=self.fn0, bg='#323232', fg='white') #from GPS
-        self.lon = tk.Label(self.fr7, text='LON ', font=self.fn0, bg='#323232', fg='white') #from GPS
-        self.alt = tk.Label(self.fr7, text='ALT ', font=self.fn0, bg='#323232', fg='white') #from GPS
-        self.vn = tk.Label(self.fr7, text='VIS ', font=self.fn0, bg='#323232', fg='white') #from algo
-        self.rn = tk.Label(self.fr7, text='REM ', font=self.fn0, bg='#323232', fg='white') #from algo
+        self.lat = tk.Label(self.fr7, text='LAT ', font=self.fn0, bg='#011239', fg='white') #from GPS
+        self.lon = tk.Label(self.fr7, text='LON ', font=self.fn0, bg='#011239', fg='white') #from GPS
+        self.alt = tk.Label(self.fr7, text='ALT ', font=self.fn0, bg='#011239', fg='white') #from GPS
+        self.vn = tk.Label(self.fr7, text='VIS ', font=self.fn0, bg='#011239', fg='white') #from algo
+        self.rn = tk.Label(self.fr7, text='REM ', font=self.fn0, bg='#011239', fg='white') #from algo
         self.cps_i = ImageTk.PhotoImage(Image.open('./images/CPS-X.gif').convert('RGBA').rotate(90))
-        self.cps = tk.Label(self.fr7, image=self.cps_i, bg='#323232', borderwidth=0, highlightthickness=0) #from GPS
+        self.cps = tk.Label(self.fr7, image=self.cps_i, bg='#011239', borderwidth=0, highlightthickness=0) #from GPS
         #obstacles - add to grid
         self.lat.grid(row=7,column=12)
         self.lon.grid(row=8,column=12)
@@ -2257,13 +2257,13 @@ class App():
     def init_map(self):
         #map
         self.mapi = ImageTk.PhotoImage(Image.open('./images/MAP.gif'))
-        self.map = tk.Label(self.fr7, image=self.mapi, borderwidth=4, highlightthickness=4, bg='#323232')
+        self.map = tk.Label(self.fr7, image=self.mapi, borderwidth=4, highlightthickness=4, bg='#011239')
         self.map.grid(row=2, column=10, columnspan=6, rowspan=5, sticky='N')
 
 
     def init_footer(self):
         #session
-        self.sessioni = tk.Label(self.fr7, text='Session Info: ', font=self.fn0, bg='#323232', fg='white')
+        self.sessioni = tk.Label(self.fr7, text='Session Info: ', font=self.fn0, bg='#011239', fg='white')
         self.sessioni.grid(row=12,column=0)
         #get info
         self.hostname = socket.gethostname()
@@ -2273,15 +2273,15 @@ class App():
         self.outcount = 0
         self.datacount = 0
         self.sessionstr = '  Hostname: ' + self.hostname + '  | Host Address: ' + self.hostaddress + '  | Remote: ' + self.remotename + '  | Remote Address: ' + self.remoteaddress + '  | Sent: ' + str(self.outcount) + '  | Received: ' + str(self.incount) + '  |Data Exchanged: ' + str(self.datacount)
-        self.session = tk.Label(self.fr7, text=self.sessionstr, font=self.fn0, bg='#323232', fg='white')
+        self.session = tk.Label(self.fr7, text=self.sessionstr, font=self.fn0, bg='#011239', fg='white')
         self.session.grid(row=12,column=1, columnspan=15, sticky='W')
         #copyright info
-        self.foot = tk.Label(self.fr7, text='Copyright '+ u'\xa9' + ' 2017', font=self.fn1, bg='#323232', fg='white')
+        self.foot = tk.Label(self.fr7, text='Copyright '+ u'\xa9' + ' 2017', font=self.fn1, bg='#011239', fg='white')
         self.foot.grid(row=14,columnspan=16)
 
 
     def init_checks(self):
-        title = 'Honu Home 2.1'
+        title = 'Honu Home 3.9'
         message = 'System Checks\nNetwork: OK\nModules: OK\nDatabase: OK'
         def win_popup():
             pop = WindowsBalloonTip(title, message)
@@ -2302,8 +2302,8 @@ class App():
     def header_changes(self):
     	datestr = self.tupdate['DATE']
         timestr = self.tupdate['TIME']
-        self.date.configure(text=datestr, font=self.fn0, bg='#323232', fg='white')
-        self.time.configure(text=timestr, font=self.fn0, bg='#323232', fg='white')
+        self.date.configure(text=datestr, font=self.fn0, bg='#011239', fg='white')
+        self.time.configure(text=timestr, font=self.fn0, bg='#011239', fg='white')
         self.CTRLi = ImageTk.PhotoImage(Image.open(self.iupdate['CTRL']))
         self.CTRL.configure(image=self.CTRLi)
         self.ctrl1 = self.iupdate['CTRL']
@@ -2358,36 +2358,36 @@ class App():
     	#sensor icon changes
         self.battery_i = ImageTk.PhotoImage(Image.open(self.iupdate['BAT']))
         self.comb_i = ImageTk.PhotoImage(Image.open(self.iupdate['CMB']))    	
-       	self.batteryi.configure(image=self.battery_i, bg='#323232', borderwidth=0, highlightthickness=0) #from volie
-        self.combi.configure(image=self.comb_i, bg='#323232', borderwidth=0, highlightthickness=0) #from current
+       	self.batteryi.configure(image=self.battery_i, bg='#011239', borderwidth=0, highlightthickness=0) #from volie
+        self.combi.configure(image=self.comb_i, bg='#011239', borderwidth=0, highlightthickness=0) #from current
 
 
     def update_sensor_values(self):
-    	self.speed.configure(text=self.tupdate['SPD'], font=self.fn0, bg='#323232', fg='white') #from GPS
-        self.battery.configure(text=self.tupdate['BAT'], font=self.fn0, bg='#323232', fg='white') #from volie
-        self.comb.configure(text=self.tupdate['CMB'], font=self.fn0, bg='#323232', fg='white') #from current
-        self.temp.configure(text=self.tupdate['TMP'], font=self.fn0, bg='#323232', fg='white') #from humidity sensor
-        self.humid.configure(text=self.tupdate['HUM'], font=self.fn0, bg='#323232', fg='white') #from humidity sensor
-        self.vol.configure(text=self.tupdate['VOL'], font=self.fn0, bg='#323232', fg='white') #from internal IR
+    	self.speed.configure(text=self.tupdate['SPD'], font=self.fn0, bg='#011239', fg='white') #from GPS
+        self.battery.configure(text=self.tupdate['BAT'], font=self.fn0, bg='#011239', fg='white') #from volie
+        self.comb.configure(text=self.tupdate['CMB'], font=self.fn0, bg='#011239', fg='white') #from current
+        self.temp.configure(text=self.tupdate['TMP'], font=self.fn0, bg='#011239', fg='white') #from humidity sensor
+        self.humid.configure(text=self.tupdate['HUM'], font=self.fn0, bg='#011239', fg='white') #from humidity sensor
+        self.vol.configure(text=self.tupdate['VOL'], font=self.fn0, bg='#011239', fg='white') #from internal IR
 
 
     def update_clearance_values(self):
         #obstacles - update values
-        self.front.configure(text=self.tupdate['FDIST'], font=self.fn0, bg='#323232', fg='white')
-        self.left.configure(text=self.tupdate['LDIST'], font=self.fn0, bg='#323232', fg='white')
-        self.right.configure(text=self.tupdate['RDIST'], font=self.fn0, bg='#323232', fg='white')
-        self.rear.configure(text=self.tupdate['BDIST'], font=self.fn0, bg='#323232', fg='white')
+        self.front.configure(text=self.tupdate['FDIST'], font=self.fn0, bg='#011239', fg='white')
+        self.left.configure(text=self.tupdate['LDIST'], font=self.fn0, bg='#011239', fg='white')
+        self.right.configure(text=self.tupdate['RDIST'], font=self.fn0, bg='#011239', fg='white')
+        self.rear.configure(text=self.tupdate['BDIST'], font=self.fn0, bg='#011239', fg='white')
 
 
     def update_spatial_data(self):
         #spatial - update values - need to write these into the honu message
-        self.lat.configure(text=self.tupdate['LAT'], font=self.fn0, bg='#323232', fg='white') 
-        self.lon.configure(text=self.tupdate['LON'], font=self.fn0, bg='#323232', fg='white') 
-        self.alt.configure(text=self.tupdate['ALT'], font=self.fn0, bg='#323232', fg='white') 
-        self.vn.configure(text=self.tupdate['VNODE'], font=self.fn0, bg='#323232', fg='white')
-        self.rn.configure(text=self.tupdate['RNODE'], font=self.fn0, bg='#323232', fg='white')
+        self.lat.configure(text=self.tupdate['LAT'], font=self.fn0, bg='#011239', fg='white') 
+        self.lon.configure(text=self.tupdate['LON'], font=self.fn0, bg='#011239', fg='white') 
+        self.alt.configure(text=self.tupdate['ALT'], font=self.fn0, bg='#011239', fg='white') 
+        self.vn.configure(text=self.tupdate['VNODE'], font=self.fn0, bg='#011239', fg='white')
+        self.rn.configure(text=self.tupdate['RNODE'], font=self.fn0, bg='#011239', fg='white')
         self.bear = ImageTk.PhotoImage(Image.open('./images/CPS-X.gif').convert('RGBA').rotate(float(self.tupdate['BEAR']))) #-22.5 will be angle variable
-        self.cps.configure(image=self.bear, bg='#323232', borderwidth=0, highlightthickness=0)
+        self.cps.configure(image=self.bear, bg='#011239', borderwidth=0, highlightthickness=0)
 
 
     def update_footer(self):
@@ -2396,7 +2396,7 @@ class App():
         self.datastr = helper.formatcount2(self.datacount)
         #self.pingtime = helper.calcping(self.outtime, self.intime)
     	self.sessionstr = '  Hostname: ' + self.hostname + '  | Host Address: ' + self.hostaddress + '  | Remote: ' + self.remotename + '  | Remote Address: ' + self.remoteaddress + '  | Sent: ' + str(self.outstr) + '  | Received: ' + str(self.instr) + '  | Data Exchanged: ' + str(self.datastr) #+ '  | Ping Time: ' + str(self.pingtime)
-    	self.session.configure(text=self.sessionstr, font=self.fn0, bg='#323232', fg='white')
+    	self.session.configure(text=self.sessionstr, font=self.fn0, bg='#011239', fg='white')
 
 
     def raise_frame(self, frame): #GUI Specific
@@ -2505,58 +2505,56 @@ class App():
 
         #declare widgets
             #header
-        self.control_exit_btn = tk.Button(self.fr8, text='X', font=self.fn0, bg='#DB4437', fg='#FFFFFF', relief='flat', command=lambda:self.raise_frame(self.fr7))
-        self.control_label = tk.Label(self.fr8, text='REMOTE CONTROL', font=self.fn2, bg='#DB4437', fg='#FFFFFF')
+        self.control_exit_btn = tk.Button(self.fr8, font=self.fn0, relief='flat', bg='black', command=lambda:self.raise_frame(self.fr7))
+        self.control_exit_btn.config(image=self.l_arrow)
+        self.control_label = tk.Label(self.fr8, text='HONU REMOTE CONTROL', font=self.fn2, bg='black', fg='white')
 
         	#movement
-        self.steering = tk.Scale(self.fr8, from_=-1, to=1, orient=tk.HORIZONTAL, length=250, sliderrelief=tk.FLAT, highlightthickness=5, command=self.turning)
+        self.steering = tk.Scale(self.fr8, from_=-1, to=1, orient=tk.HORIZONTAL, length=250, sliderrelief=tk.FLAT, highlightthickness=5, showvalue=False, command=self.turning)
         self.thrust = tk.Scale(self.fr8, from_=-80, to=80, orient=tk.VERTICAL, length=250, sliderrelief=tk.FLAT, highlightthickness=5, command=self.thrusting)
 
-        self.steering_L = tk.Label(self.fr8, text='L', font=self.fn0, bg='#33B679', fg='#FFFFFF')
-        self.steering_R = tk.Label(self.fr8, text='R', font=self.fn0, bg='#33B679', fg='#FFFFFF')
-        self.thrust_F = tk.Label(self.fr8, text='F', font=self.fn0, bg='#33B679', fg='#FFFFFF')
-        self.thrust_N = tk.Label(self.fr8, text='N', font=self.fn0, bg='#33B679', fg='#FFFFFF')
-        self.thrust_R = tk.Label(self.fr8, text='R', font=self.fn0, bg='#33B679', fg='#FFFFFF')
+        self.steering_L = tk.Label(self.fr8, text='L', font=self.fn0, bg='#000000', fg='#FFFFFF')
+        self.steering_R = tk.Label(self.fr8, text='R', font=self.fn0, bg='#000000', fg='#FFFFFF')
+        self.thrust_F = tk.Label(self.fr8, text='F', font=self.fn0, bg='#000000', fg='#FFFFFF')
+        self.thrust_N = tk.Label(self.fr8, text='N', font=self.fn0, bg='#000000', fg='#FFFFFF')
+        self.thrust_R = tk.Label(self.fr8, text='R', font=self.fn0, bg='#000000', fg='#FFFFFF')
 
-        self.pivot_btn = tk.Button(self.fr8, text='PIVOT', font=self.fn0, bg='#DB4437', fg='#FFFFFF', command=lambda:self.toggle_pivot())
+        self.pivot_btn = tk.Button(self.fr8, text='PIVOT', font=self.fn0, bg='#DB4437', fg='#FFFFFF', relief='flat', command=lambda:self.toggle_pivot())
 
         	#comb and door
-        self.comb_btn = tk.Button(self.fr8, text='COMB', font=self.fn0, bg='#DB4437', fg='#FFFFFF', command=lambda:self.toggle_comb())
-        self.door_btn = tk.Button(self.fr8, text='DOOR', font=self.fn0, bg='#DB4437', fg='#FFFFFF', command=lambda:self.toggle_door())
+        self.comb_btn = tk.Button(self.fr8, text='COMB', font=self.fn0, bg='#DB4437', fg='#FFFFFF', relief='flat', command=lambda:self.toggle_comb())
+        self.door_btn = tk.Button(self.fr8, text='DOOR', font=self.fn0, bg='#DB4437', fg='#FFFFFF', relief='flat', command=lambda:self.toggle_door())
 
         	#e-stop
-        self.e_stop_btn = tk.Button(self.fr8, text='STOP!', font=self.fn0, bg='#DB4437', fg='#FFFFFF', command=lambda:self.estop())
+        self.e_stop_btn = tk.Button(self.fr8, text='STOP\n(LOCK)', font=self.fn0, bg='#DB4437', fg='#FFFFFF', relief='flat', command=lambda:self.estop())
 
-        '''
         #apply spacing
-        for i in range(0, 7):
-            self.fr8.rowconfigure(i, pad=80)
-            self.fr8.columnconfigure(i, pad=80)
-        '''
+        self.fr8.rowconfigure(1, pad=80)
+        self.fr8.columnconfigure(2, pad=180)
 
         #grid widgets
             #header
-        self.control_exit_btn.grid(row=0, column=0, sticky='NEWS')
-        self.control_label.grid(row=0, column=1, columnspan=10, sticky='NEWS')
+        self.control_exit_btn.grid(row=0, column=0, sticky='NWS')
+        self.control_label.grid(row=0, column=1, columnspan=10, sticky='NEWS', ipadx=500)
 
         	#movement
-        self.steering.grid(row=2, column=2, columnspan=5, sticky='EW')
+        self.steering.grid(row=2, column=3, columnspan=3, sticky='EW')
         self.thrust.grid(row=4, column=4, rowspan=5, sticky='NS')
 
-        self.steering_L.grid(row=1, column=2)
-        self.steering_R.grid(row=1, column=6)
-        self.thrust_F.grid(row=4, column=5)
-        self.thrust_N.grid(row=6, column=5)
-        self.thrust_R.grid(row=8, column=5)
+        self.steering_L.grid(row=2, column=2, ipadx=10, ipady=10, sticky='SE')
+        self.steering_R.grid(row=2, column=6, ipadx=10, ipady=10, sticky='SW')
+        self.thrust_F.grid(row=4, column=5, ipadx=10, ipady=10, sticky='W')
+        self.thrust_N.grid(row=6, column=5, ipadx=10, ipady=10, sticky='W')
+        self.thrust_R.grid(row=8, column=5, ipadx=10, ipady=10, sticky='W')
 
-        self.pivot_btn.grid(row=1, column=4)
+        self.pivot_btn.grid(row=1, column=4, ipadx=10, ipady=10)
 
         	#comb and door
-        self.comb_btn.grid(row=4, column=1)
-        self.door_btn.grid(row=4, column=7)
+        self.comb_btn.grid(row=4, column=2, sticky='E', ipadx=10, ipady=10)
+        self.door_btn.grid(row=4, column=6, sticky='W', ipadx=10, ipady=10)
 
         	#e-stop
-        self.e_stop_btn.grid(row=6, column=7, rowspan=3, columnspan=3)
+        self.e_stop_btn.grid(row=6, column=6, rowspan=3, ipadx=10, ipady=10, sticky='W')
 
 
     def turning(self, event):
