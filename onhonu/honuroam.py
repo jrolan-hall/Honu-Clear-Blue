@@ -160,9 +160,9 @@ class App():
 
 			if (self.keyval['LEFT1_btn']==True) and (self.acc>-101):
 				print 'rev'
-				self.acc += -0.1
+				self.acc += -0.33
 			if (self.keyval['RIHT1_btn']==True) and (self.acc<101):
-				self.acc += 0.1
+				self.acc += 0.33
 				print 'fwd'
 			print self.acc
 
