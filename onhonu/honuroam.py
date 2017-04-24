@@ -164,7 +164,8 @@ class App():
 			if (self.keyval['RIHT1_btn']==True) and (self.acc<101):
 				self.acc += 0.33
 				print 'fwd'
-			print self.acc
+			if int(self.acc)%10 == 0:
+				print int(self.acc)
 
 			#self.acc = scale_trigger(self.keyval['LEFT2_trg'])-scale_trigger(self.keyval['RIHT2_trg'])
 
@@ -178,12 +179,12 @@ class App():
 				self.turn = -1 #left
 				print 'left turn'
                         """
-			if (self.keyval['RIGHT_btn']==True) and (self.keyval['LEFTA_btn']==True) and self.acc==1000:
+			if (self.keyval['RIGHT_btn']==True) and (self.keyval['LEFTA_btn']==True):
 				self.turn = 0
                	        output = int(1500-500*self.acc/100.0)
                	        if output > 1999:
                	            output = 1999
-               	        if (self.acc != 0) and (self.turn == 0): #forward and backwards at same speed
+               	        if (self.acc != 0) and (self.turn == 0) and (self.acc%10 == 0): #forward and backwards at same speed
                	            arduino.write(str(output)+'\n')
                	            print 'drive: '+str(output)
                	            self.l_acc = self.acc
