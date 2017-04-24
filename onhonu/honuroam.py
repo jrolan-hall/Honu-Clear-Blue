@@ -178,7 +178,6 @@ class App():
 			if self.keyval['LEFTA_btn']==True:
 				self.turn = -1 #left
 				print 'left turn'
-                        """
 			if (self.keyval['RIGHT_btn']==True) and (self.keyval['LEFTA_btn']==True):
 				self.turn = 0
                	        output = int(1500-500*self.acc/100.0)
@@ -218,7 +217,6 @@ class App():
                	        else:
                	            print 'unknown state'
                	            #arduino.write('1500\n')
-               	        """
 
 
 
