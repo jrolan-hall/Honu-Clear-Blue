@@ -201,6 +201,7 @@ class App():
      			            arduino.write(str(r_out)+'\n')			    
 
 			#self.acc = scale_trigger(self.keyval['LEFT2_trg'])-scale_trigger(self.keyval['RIHT2_trg'])
+	                print 'acc:'+str(self.acc)
 
 			self.turn = 0
 
