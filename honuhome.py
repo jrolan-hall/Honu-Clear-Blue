@@ -256,11 +256,11 @@ class App():
         '''Make dividers for dashboard'''   
         
         #declare dividers
-        self.div1 = tk.Frame(self.fr7, height=5, width=1280, bd=1, bg='#00a3fe', relief='flat')
-        self.div2 = tk.Frame(self.fr7, height=5, width=1280, bd=1, bg='#00a3fe', relief='flat')
-        self.div3 = tk.Frame(self.fr7, height=500, width=5, bd=1, bg='#00a3fe', relief='flat')
-        self.div4 = tk.Frame(self.fr7, height=557, width=5, bd=1, bg='#00a3fe', relief='flat')
-        self.div5 = tk.Frame(self.fr7, height=5, width=1280, bd=1, bg='#00a3fe', relief='flat')
+        self.div1 = tk.Frame(self.fr7, height=5, width=1280, bd=1, bg='#323b51', relief='flat')
+        self.div2 = tk.Frame(self.fr7, height=5, width=1280, bd=1, bg='#323b51', relief='flat')
+        self.div3 = tk.Frame(self.fr7, height=500, width=5, bd=1, bg='#323b51', relief='flat')
+        self.div4 = tk.Frame(self.fr7, height=557, width=5, bd=1, bg='#323b51', relief='flat')
+        self.div5 = tk.Frame(self.fr7, height=5, width=1280, bd=1, bg='#323b51', relief='flat')
         
         #add to grid
         self.div1.grid(row=1, columnspan=16, sticky='N')
@@ -2141,9 +2141,9 @@ class App():
 
     def init_dash_MBOX(self):
         #message box
-        self.mboxfrm = tk.Frame(self.fr7, height=120, width=810, bd=1, bg='#00a3fe', relief='flat')
-        self.mboxlabel = tk.Label(self.mboxfrm, text='Messages', font=self.fn1, bg='#00a3fe', fg='#011239')
-        self.mbox = tk.Label(self.mboxfrm,text='Busy bantering with bored beachgoers', font=self.fn0, bg='#00a3fe', fg='#011239', wraplength=420)
+        self.mboxfrm = tk.Frame(self.fr7, height=120, width=810, bd=1, bg='#323b51', relief='flat')
+        self.mboxlabel = tk.Label(self.mboxfrm, text='Messages', font=self.fn1, bg='#323b51', fg='white')
+        self.mbox = tk.Label(self.mboxfrm,text='Busy bantering with bored beachgoers', font=self.fn0, bg='#323b51', fg='white', wraplength=420)
         self.mboxfrm.grid_propagate(False)
         self.mboxfrm.grid(row=7,column=0,columnspan=9,rowspan=3, sticky='E')
         self.mboxlabel.grid(row=0, column=0, columnspan=9, sticky='W')
