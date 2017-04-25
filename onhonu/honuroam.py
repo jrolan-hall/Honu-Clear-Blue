@@ -176,6 +176,7 @@ class App():
 				print int(self.acc)
 			if (self.keyval['LSTCK_btn']==True) and (self.l_boost<31):
 			        self.l_boost += 0.33
+			        print self.l_boost
 			        if int(self.l_boost)%10==0:
 			            self.l_acc = self.acc + self.l_boost
 			            print self.l_acc
@@ -188,6 +189,7 @@ class App():
 			                
 			if (self.keyval['RSTCK_btn']==True) and (self.r_boost<31):
 			         self.r_boost += 0.33
+			         print self.r_boost
      			         if int(self.r_boost)%10==0:
      			            self.r_acc = self.acc + self.r_boost
      			            print self.r_acc
