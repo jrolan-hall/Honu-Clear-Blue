@@ -166,12 +166,12 @@ class App():
 
 			self.pivot = self.keyval['CROSS_btn']
 
-			if (self.keyval['RIHT1_btn']==True) and (self.acc>-101):
-				print 'rev'
-				self.acc += -0.33
-			if (self.keyval['LEFT1_btn']==True) and (self.acc<101):
-				self.acc += 0.33
+			if (self.keyval['RIHT1_btn']==True) and (self.acc<101):
 				print 'fwd'
+				self.acc += 0.33
+			if (self.keyval['LEFT1_btn']==True) and (self.acc>-101):
+				self.acc += -0.33
+				print 'rev'
 			if int(self.acc)%10 == 0:
 				print int(self.acc)
 			if (self.keyval['LSTCK_btn']==True) and (self.l_boost<31):
@@ -248,8 +248,8 @@ class App():
                	                    arduino.write(str(l_out)+'\n')
                	                    self.r_acc = self.acc
                	                    self.l_acc = -self.acc
-               	        else:
-               	            print 'unknown state'
+               	        #else:
+               	            #print 'unknown state'
                	            #arduino.write('1500\n')
 
 
