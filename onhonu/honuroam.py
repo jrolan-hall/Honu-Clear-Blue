@@ -180,7 +180,7 @@ class App():
 			        if int(self.l_boost)%10==0:
 			            self.l_acc = self.acc + self.l_boost
 			            print self.l_acc
-			            l_out = int(2500+500*self.l_acc/100.0)
+			            l_out = int(2500-500*self.l_acc/100.0)
 			            if l_out > 2999:
 			                l_out = 2999
 			            elif l_out < 2000:
@@ -193,7 +193,7 @@ class App():
      			         if int(self.r_boost)%10==0:
      			            self.r_acc = self.acc + self.r_boost
      			            print self.r_acc
-     			            r_out = int(3500-500*self.r_acc/100.0)
+     			            r_out = int(3500+500*self.r_acc/100.0)
      			            if r_out < 3000:
      			                r_out = 3000
      			            elif r_out > 3999:
