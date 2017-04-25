@@ -126,6 +126,8 @@ class App():
 				self.r_acc = 0
 				self.c_acc = 0
 				self.acc = 0
+				self.l_boost = 0
+				self.r_boost = 0
 				print 'Locked'
 
 			if self.keyval['TRIAN_btn']==True: #door open - drive motors stop to do this
@@ -135,6 +137,8 @@ class App():
 				arduino.write('5999\n')
 				self.door = 'O'
 				self.acc = 0
+				self.l_boost = 0
+				self.r_boost = 0
 				print 'door open'
 
 			if self.keyval['SQUAR_btn']==True: #door close - drive motors stop to do this
@@ -144,6 +148,8 @@ class App():
 				arduino.write('5000\n')
 				self.door = 'C'
 				self.acc = 0
+				self.l_boost = 0
+				self.r_boost = 0
 				print 'door close'
 
 			if self.keyval['UPARR_btn']==True: #comb on
@@ -168,6 +174,29 @@ class App():
 				print 'fwd'
 			if int(self.acc)%10 == 0:
 				print int(self.acc)
+			if (self.keyval['LSTCK_btn']==True) and (self.l_boost<31):
+			        self.l_boost += 0.33
+			        if int(self.l_boost)%10==0:
+			            self.l_acc = self.acc + self.l_boost
+			            print self.l_acc
+			            l_out = int(2500+500*self.l_acc/100.0)
+			            if l_out > 2999:
+			                l_out = 2999
+			            elif l_out < 2000:
+			                l_out = 2000
+			            arduino.write(str(l_out)+'\n')
+			                
+			if (self.keyval['RSTCK_btn']==True) and (self.r_boost<31):
+			         self.r_boost += 0.33
+     			         if int(self.r_boost)%10==0:
+     			            self.r_acc = self.acc + self.r_boost
+     			            print self.r_acc
+     			            r_out = int(3500-500*self.r_acc/100.0)
+     			            if r_out < 3000:
+     			                r_out = 3000
+     			            elif r_out > 3999:
+     			                r_out = 3999
+     			            arduino.write(str(r_out)+'\n')			    
 
 			#self.acc = scale_trigger(self.keyval['LEFT2_trg'])-scale_trigger(self.keyval['RIHT2_trg'])
 
@@ -290,6 +319,8 @@ class App():
 			self.l_acc = 0
 			self.r_acc = 0
 			self.acc = 0
+			self.l_boost = 0
+			self.r_boost = 0
 			self.obl = False
 
 			#ready to connect light show
