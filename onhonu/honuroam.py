@@ -201,7 +201,7 @@ class App():
      			            arduino.write(str(r_out)+'\n')			    
 
 			#self.acc = scale_trigger(self.keyval['LEFT2_trg'])-scale_trigger(self.keyval['RIHT2_trg'])
-	                print 'acc:'+str(self.acc)
+	                #print 'acc:'+str(self.acc)
 
 			self.turn = 0
 
@@ -422,7 +422,7 @@ class App():
 				self.coll = True
 				if self.l_acc > 0 and self.r_acc > 0:
 					(self.l_acc, self.r_acc) = (0,0)
-					arduino.write('1500\n')
+					#arduino.write('1500\n')
 					print 'front collision avoided!'
 					if self.state['FCLR'] == '1':
 						self.B_LED = 'Y'
@@ -433,7 +433,7 @@ class App():
 				self.coll = True
 				if self.l_acc < 0 and self.r_acc < 0:
 					(self.l_acc, self.r_acc) = (0,0)
-					arduino.write('1500\n')
+					#arduino.write('1500\n')
 					print 'back collision avoided!'
 					if self.state['BCLR'] == '1':
 						self.B_LED = 'Y'
