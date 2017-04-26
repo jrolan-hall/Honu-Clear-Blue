@@ -361,8 +361,8 @@ class App():
 						self.state['CMO'] = 'N'
 					hello_arduino()
 					sleep(0.008)
-					#collision_avoidance()
-					#print self.state['FDIST'], self.state['FCLR'], self.state['BDIST'], self.state['BCLR']
+					collision_avoidance()
+					#print self.state['f'], self.state['FCLR'], self.state['BDIST'], self.state['BCLR']
 
 			u = threading.Thread(target=get_state)# need to work on this some more
 			u.start()
@@ -422,17 +422,24 @@ class App():
 				self.coll = True
 				if self.l_acc > 0 and self.r_acc > 0:
 					(self.l_acc, self.r_acc) = (0,0)
+					arduino.write('1500\n')
 					print 'front collision avoided!'
+					if self.state['FCLR'] == '1':
+						self.B_LED = 'Y'
+					elif self.state['FCLR'] == '2':
+						self.B_LED = 'R'
 
 			elif (self.state['BCLR'] != 'N'):
 				self.coll = True
 				if self.l_acc < 0 and self.r_acc < 0:
 					(self.l_acc, self.r_acc) = (0,0)
+					arduino.write('1500\n')
 					print 'back collision avoided!'
 					if self.state['BCLR'] == '1':
 						self.B_LED = 'Y'
 					elif self.state['BCLR'] == '2':
 						self.B_LED = 'R'
+		        """
 			def obstacle_lights():
 				self.obl = True
 				while self.state['FCLR'] != 'N' or self.state['BCLR'] != 'N':
@@ -454,6 +461,7 @@ class App():
 			if self.obl == False:
 				w = threading.Thread(target=obstacle_lights)
 				w.start()
+		        """
 				
 
 		def tell_arduino():

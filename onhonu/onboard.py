@@ -27,12 +27,12 @@ def sense_DATA():
 	#FRONT CLEARANCE
 	#IR sensor
 	F_in = eh.analog.one.read()
-	if F_in < 0.4: 
+	if F_in < 1: 
 		packet['FCLR'] = 'N'	#clear
 		packet['FDIST'] = ' ' + u"\u221E" + ' '
 	else:
 		packet['FCLR'] = '1'	#obstacle nearby
-		packet['FDIST'] = str(round((17/10.0 - F_in/2.0),3))
+		packet['FDIST'] = str(round((22.5-7*F_in),3))
 
 	#Touch sensor
 	if eh.input.one.read()==True:
@@ -60,12 +60,12 @@ def sense_DATA():
 	#BACK CLEARANCE
 	#IR sensor
 	B_in = eh.analog.two.read()
-	if B_in < 0.4: 
+	if B_in < 1: 
 		packet['BCLR'] = 'N'	#clear
 		packet['BDIST'] = ' ' + u"\u221E" + ' '
 	else:
 		packet['BCLR'] = '1'	#obstacle nearby
-		packet['BDIST'] = str(round((17/10.0 - B_in/2.0),3))
+		packet['BDIST'] = str(round((27.75-8.5*B_in),3))
 
 	#Touch sensor
 	if eh.input.four.read()==True:
