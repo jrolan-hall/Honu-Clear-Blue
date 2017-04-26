@@ -439,6 +439,10 @@ class App():
 						self.B_LED = 'Y'
 					elif self.state['BCLR'] == '2':
 						self.B_LED = 'R'
+		        if self.coll == False:
+		            print 'no obstacles'
+		        else:
+		            print 'obstacles: front-'+str(self.state['FCLR'])+' back-'+str(self.state['BCLR'])
 		        """
 			def obstacle_lights():
 				self.obl = True
