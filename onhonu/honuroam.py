@@ -429,7 +429,7 @@ class App():
 					elif self.state['FCLR'] == '2':
 						self.B_LED = 'R'
 
-			elif (self.state['BCLR'] != 'N'):
+			if (self.state['BCLR'] != 'N'):
 				self.coll = True
 				if self.l_acc < 0 and self.r_acc < 0:
 					(self.l_acc, self.r_acc) = (0,0)
