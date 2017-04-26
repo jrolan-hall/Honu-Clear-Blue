@@ -27,7 +27,7 @@ def sense_DATA():
 	#FRONT CLEARANCE
 	#IR sensor
 	F_in = eh.analog.one.read()
-	if F_in < 1.5: 
+	if F_in < 0.8: 
 		packet['FCLR'] = 'N'	#clear
 		packet['FDIST'] = ' ' + u"\u221E" + ' '
 	else:
@@ -60,7 +60,7 @@ def sense_DATA():
 	#BACK CLEARANCE
 	#IR sensor
 	B_in = eh.analog.two.read()
-	if B_in < 1.5: 
+	if B_in < 0.8: 
 		packet['BCLR'] = 'N'	#clear
 		packet['BDIST'] = ' ' + u"\u221E" + ' '
 	else:
