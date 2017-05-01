@@ -359,7 +359,7 @@ class App():
 						self.state['CMO'] = 'N'
 					hello_arduino()
 					sleep(0.005)
-					#collision_avoidance()
+					collision_avoidance()
 					#print self.state['f'], self.state['FCLR'], self.state['BDIST'], self.state['BCLR']
 
 			u = threading.Thread(target=get_state)# need to work on this some more
