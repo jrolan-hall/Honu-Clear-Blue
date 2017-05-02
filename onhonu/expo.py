@@ -34,10 +34,15 @@ while True:
 		ser.write('1300\n')
 	sleep(8)
 
+	print 'stop'
+	for i in range(0,5):
+		ser.write('6000\n')
+	sleep(5)
+
 	print 'door open'
 	for i in range(0,5):
 		ser.write('5999\n')
-	sleep(5)
+	sleep(8)
 
 	print 'door close'
 	for i in range(0,5):
