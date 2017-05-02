@@ -19,7 +19,7 @@ stop_phrases = [32, 33, 34, 80]
 dock_phrases = [10, 11, 52, 53, 60]
 
 def pick_phrase(phrases):
-	say = int(random()*len(phrases))
+	say = phrases[int(random()*len(phrases))]
 	say = 'phrases/' + str(say) + '.wav'
 	return say
 
