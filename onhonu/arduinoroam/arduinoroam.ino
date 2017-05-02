@@ -23,7 +23,7 @@ void setup() {
   pinMode(4, OUTPUT); //front LED on pin 4
   pinMode(7, OUTPUT); //left LED on pin 7
   pinMode(8, OUTPUT); //right LED on pin 8
-  pinMode(10, OUTPUT); //back LED on pin 10
+  //pinMode(10, OUTPUT); //back LED on pin 10
   CMO.attach(11);      //comb motor on PWM input 3
   LMO.attach(9);      //left motor on PWM input 5 (changed to door)
   RMO.attach(3);      //right motor on PWM input 6

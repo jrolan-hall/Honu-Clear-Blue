@@ -16,14 +16,14 @@ x.start()
 
 start_phrases = [35, 36, 37, 38, 39, 46, 47, 63, 75, 79, 110, 133]
 stop_phrases = [32, 33, 34, 80]
-dock_phrases = [10, 11, 52, 53]
+dock_phrases = [10, 11, 52, 53, 60]
 
 def pick_phrase(phrases):
 	say = int(random()*len(phrases))
 	say = 'phrases/' + str(say) + '.wav'
 	return say
 
-call["aplay", pick_phrase(start_phrases)]
+call(["aplay", pick_phrase(start_phrases)])
 
 while True:
 	print 'forwards with combs on'
@@ -36,7 +36,7 @@ while True:
 	print 'stop'
 	for i in range(0,5): #stop
 		ser.write('6000\n')
-	call["aplay", pick_phrase(stop_phrases)]
+	call(["aplay", pick_phrase(stop_phrases)])
 	sleep(5)
 
 	print 'reverse with combs off'
@@ -47,10 +47,10 @@ while True:
 	print 'stop'
 	for i in range(0,5):
 		ser.write('6000\n')
-	call["aplay", pick_phrase(stop_phrases)]
+	call(["aplay", pick_phrase(stop_phrases)])
 	sleep(5)
 
-	call["aplay", pick_phrase(dock_phrases)]
+	call(["aplay", pick_phrase(dock_phrases)])
 	print 'door open'
 	for i in range(0,5):
 		ser.write('5999\n')
