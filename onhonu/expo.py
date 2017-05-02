@@ -16,7 +16,7 @@ x = threading.Thread(target=ardinput)
 x.start()
 
 while True:
-
+#
 	print 'forwards with combs on'
 	for i in range(0,5):
 		ser.write('1700\n')
