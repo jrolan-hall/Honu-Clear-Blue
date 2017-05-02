@@ -42,9 +42,9 @@ while True:
 	print 'door open'
 	for i in range(0,5):
 		ser.write('5999\n')
-	sleep(8)
+	sleep(12)
 
 	print 'door close'
 	for i in range(0,5):
 		ser.write('5000\n')
-	sleep(5)
+	sleep(10)
