@@ -36,7 +36,7 @@ while True:
 	print 'stop'
 	for i in range(0,5): #stop
 		ser.write('6000\n')
-	call(["aplay", pick_phrase(stop_phrases)])
+	#call(["aplay", pick_phrase(stop_phrases)])
 	sleep(5)
 
 	print 'reverse with combs off'
@@ -47,10 +47,10 @@ while True:
 	print 'stop'
 	for i in range(0,5):
 		ser.write('6000\n')
-	call(["aplay", pick_phrase(stop_phrases)])
+	#call(["aplay", pick_phrase(stop_phrases)])
 	sleep(5)
 
-	call(["aplay", pick_phrase(dock_phrases)])
+	#call(["aplay", pick_phrase(dock_phrases)])
 	print 'door open'
 	for i in range(0,5):
 		ser.write('5999\n')
