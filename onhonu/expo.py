@@ -14,9 +14,9 @@ def ardinput():
 x = threading.Thread(target=ardinput)
 x.start()
 
-start_phrases = [15, 16, 17, 18, 35, 36, 37, 38, 39, 46, 47, 54, 55, 63, 75, 79, 110, 133]
-stop_phrases = [32, 33, 34, 80]
-dock_phrases = [10, 11, 52, 53, 60]
+start_phrases = [15, 16, 17, 18, 35, 36, 37, 38, 39, 46, 47, 54, 55, 63, 75, 79, 104, 110, 133, 136]
+stop_phrases = [32, 33, 34,44, 49, 58, 62, 67, 80, 84, 176, 190, 221]
+dock_phrases = [10, 11, 52, 53, 60, 64]
 
 def pick_phrase(phrases):
 	say = phrases[int(random()*len(phrases))]
