@@ -28,36 +28,36 @@ call(["aplay", pick_phrase(start_phrases)])
 while True:
 	print 'forwards with combs on'
 	call(["aplay", pick_phrase(start_phrases)])
-	for i in range(0,5):
+	for i in range(0,10):
 		ser.write('1700\n')
 		ser.write('2750\n')
 		ser.write('4350\n')
 	sleep(5)
 
 	print 'stop'
-	for i in range(0,5): #stop
+	for i in range(0,10): #stop
 		ser.write('6000\n')
 	call(["aplay", pick_phrase(stop_phrases)])
 	sleep(5)
 
 	print 'reverse with combs off'
-	for i in range(0,5): #reverse with combs off
+	for i in range(0,10): #reverse with combs off
 		ser.write('1300\n')
 	sleep(8)
 
 	print 'stop'
-	for i in range(0,5):
+	for i in range(0,10):
 		ser.write('6000\n')
 	call(["aplay", pick_phrase(stop_phrases)])
 	sleep(5)
 
 	call(["aplay", pick_phrase(dock_phrases)])
 	print 'door open'
-	for i in range(0,5):
+	for i in range(0,10):
 		ser.write('5999\n')
 	sleep(12)
 
 	print 'door close'
-	for i in range(0,5):
+	for i in range(0,10):
 		ser.write('5000\n')
 	sleep(10)
