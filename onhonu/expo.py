@@ -14,7 +14,7 @@ def ardinput():
 x = threading.Thread(target=ardinput)
 x.start()
 
-start_phrases = [35, 36, 37, 38, 39, 46, 47, 63, 75, 79, 110, 133]
+start_phrases = [15, 16, 17, 18, 35, 36, 37, 38, 39, 46, 47, 54, 55, 63, 75, 79, 110, 133]
 stop_phrases = [32, 33, 34, 80]
 dock_phrases = [10, 11, 52, 53, 60]
 
@@ -27,6 +27,7 @@ call(["aplay", pick_phrase(start_phrases)])
 
 while True:
 	print 'forwards with combs on'
+	call(["aplay", pick_phrase(start_phrases)])
 	for i in range(0,5):
 		ser.write('1700\n')
 		ser.write('2750\n')
